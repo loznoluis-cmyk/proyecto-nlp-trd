@@ -1,0 +1,2150 @@
+fecha,texto,categoria,confianza
+2026-05-15 09:27:06.757178,juridico ,Juridico,25.58
+2026-05-15 09:27:30.801582,"académico 
+",Academico,98.74
+2026-05-15 09:27:43.688419,"talento_humano
+
+",Juridico,25.58
+2026-05-15 09:27:54.379415,"Administrativo 
+
+",Administrativo,85.97
+2026-05-15 10:21:39.973518,solicitud de matrícula académica del estudiante para el semestre 2025,Academico,99.38
+2026-05-21 08:34:31.977088,"Actividad 4  
+Sistema inteligente de Clasificación documental Utilizando procesamiento 
+de lenguaje natural.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Estudiante: Luis  Alberto lozano Alvarez  
+ 
+Docente: William Ruiz  
+ 
+Procesamiento de lenguaje natural  
+ 
+ 
+ 
+ 
+ 
+Corporación Universitaria Ibero Americana  
+Especialización en inteligencia Artificial  
+Mayo 2026  
+Tunja  TABLA DE CONTENIDO  
+Contenido  
+Resumen:  ................................ ................................ ............................  4 
+SUMMARY  ................................ ................................ ............................  6 
+Palabras claves : ................................ ................................ ...................  7 
+Introducción  ................................ ................................ ........................  8 
+Objetivo general  ................................ ................................ ...................  9 
+Objetivos específicos ................................ ................................ ............  9 
+Materiales y métodos.  ................................ ................................ .........  10 
+Metodología de desarrollo  ................................ ...............................  11 
+Herramientas y tecnologías utilizadas.  ................................ ..........  11 
+Procesamiento textual.  ................................ ................................  11 
+Representación vectorial TF -IDF ................................ .......................  12 
+Entrenamiento del modelo ................................ ...............................  12 
+Interfaz grafica .  ................................ ................................ ..............  14 
+Resultados ................................ ................................ .........................  15 
+Métricas obtenidas. ................................ ................................ .........  16 
+Matriz de confusión  ................................ ................................ .........  17 
+Resultados de clasificación.  ................................ ............................  17 Discusión.  ................................ ................................ .........................  18 
+CONCLUSIONES  ................................ ................................ ................  19 
+REFERENCIAS BIBLIOGRÁFICAS  ................................ ........................  20 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+ 
+ 
+Resumen:  
+Este proyecto tiene como objetivo  principal poder desarrollar  un sistema 
+inteligente de clasificación documental  en las cuales se utilizaron  técnicas de 
+procesamiento de lenguaje natural (PNL), minería  de textos  y algoritmos de 
+Machine Learning , con  el propósito de automatizar  procesos organizacionales  
+relacionados con la clasificación y gestión documental.  En la situación 
+tecnológica actual , muchas organizaciones realizan  todavía  la clasificación de 
+documentos de manera manual, lo que genera  problemas asociados  a la 
+pérdida de tiempo, errores  humanos, baja eficiencia operativa  y dificultades en 
+la administración  de grandes volúmenes de información textual , debido a esto , 
+se crea la necesidad de implementar soluciones tecnológicas capaces de 
+procesar automáticamente documentos digitales  mediante inteligencia artificial.  
+Este sistema permite  cargar documentos en formato Pdf y Word, igual que 
+ingresar texto de manera manual, para posteriormente realizar procesos de 
+limpieza textual,  normalización y representación vectorial  utilizando la técnica 
+TF-IDF. posteriormente, lo s textos se procesan  por modelos de Machine 
+Learning , los cuales se entrenaron de manera previa  para poder determinar de 
+manera automática la categoría documental  correspondiente, adicional se 
+integró un Dashboard analítico  que permita visualizar métr icas y estadísticas 
+con las clasificaciones realizadas.  Durante el desarrollo de este proyecto  se han utilizado diferentes herramientas 
+y librerias  de Python , como Streamlit para la construcción de una interfaz 
+gráfica, Scikit -learn  para entrenamiento de modelos de  Machine Learning , 
+Pandas para el manejo de datos, Matplotlib   y Seaborn para visualización de 
+resultados , Wordcloud para la representación  gráfica  de palabras relevantes y 
+PyPDF2 junto con Python -docx para la lectura automática de documentos . 
+Como parte el proceso metodológico , se implementan técnicas de 
+procesamiento textual  orientadas a mejorar la calidad de los datos , en estas 
+técnicas se encuentran  la limpieza de caracteres especiales , normalización de 
+texto, tokenizacion  y eliminación de palabras irrelevantes , posteriormente , se 
+aplicó la representación TF-IDF para transformar los documentos  en vectores 
+numérico  adecuados  para el entrenamiento  de modelos supervisados.  
+En cuanto a los resultados obtenidos , el sistema logro calificar  documentos de 
+forma automática  con altos niveles de precisión  y estabilidad, lo cu al permite 
+evidenciar  lo efectivo del procesamiento  de lenguaje natural  de procesos de 
+organizaciones reales además se integró un módulo de inteligencia artificial 
+explicable capaz de mostrar  las palabras  mas relevantes detectadas por el 
+modelo durante la clasificación  , facilitando así l a interpretación de resultados  
+generados por el sistema.  
+Finalmente , el proyecto logro demostrar que las técnicas de minería de texto y 
+PLN representan herramientas altamente útiles para automatizar procesos  
+documentales  dentro de las organizaciones y contribuyendo de manera 
+significativa a la eficiencia administrativa, reducción de tiempos operativos y 
+mejora en la gestión de la información.  SUMMARY  
+The main objective of this project was to develop an intelligent document 
+classification system using Natural Language Processing (NLP), text mining, 
+and Machine Learning algorithms, with the purpose of automating 
+organizational processes related to docume nt classification and management. 
+Nowadays, many organizations still classify documents manually, which causes 
+problems like wasted time, human errors, low operational efficiency, and 
+difficulties managing large amounts of textual information. Because of t his, 
+there is a growing need to implement technological solutions capable of 
+automatically processing digital documents through artificial intelligence.  
+The developed system allows users to upload PDF and Word documents, as 
+well as manually enter text, in order to later perform text cleaning, 
+normalization, and vector representation processes using the TF -IDF technique. 
+After that, the texts are processed by previously trained Machine Learning 
+models to automatically determine the corresponding document category. In 
+addition, an analytical dashboard was integrated to visualize metrics and 
+statistics related to the classifications made by the system.  
+During the development of the project, different Python tools and libraries were 
+used, including Streamlit for building the graphical interface, Scikit -learn for 
+training Machine Learning models, Pandas for data handling, Matplotlib and 
+Seaborn for result visualization, WordCloud for graphical representation of 
+relevant words, and PyPDF2 together with python -docx for automatic 
+document reading.  As part of the methodological process, several text preprocessing techniques 
+were implemented to improve data quality. These techniques included special 
+character cleaning, text normalization, tokenization, and removal of irrelevant 
+words. Later, the TF -IDF representation was applied to transform the 
+documents into numerical vectors suitable for supervised model training.  
+Regarding the obtained results, the system was able to classify documents 
+automatically with high levels of accuracy and stability, showing the 
+effectiveness of Natural Language Processing in real organizational processes. 
+Additionally, an explainable arti ficial intelligence module was integrated, 
+capable of displaying the most relevant words detected by the model during 
+classification, making it easier to understand the results generated by the 
+system.  
+Finally, the project demonstrates that text mining and NLP techniques are 
+highly useful tools for automating document processes inside organizations, 
+significantly contributing to administrative efficiency, reduction of operational 
+times, and improvement i n information management.  
+Palabras claves :  
+• Procesamiento de lengu aje natural  
+• NLP  
+• Machine Learning  
+• TF-IDF 
+• Minería de texto  
+• Clasificacion Documental  • Inteligencia Artificial  
+• Automatización de procesos  
+ 
+Introducción  
+La  transformación digital  ha permitido a las organizaciones modernas  
+dependan  bastante de sistemas informáticos  para gestionar  grandes cantidades 
+de información documental. Bajo estos parámetros , la clasificación documental  
+constituye un tarea fundamental  para garantizar la organización , recuperación 
+y administración eficiente de documentos  dentro de diferentes áreas 
+administrativas, jurídicas y académicas. Sin embargo, en múltiples  
+organizaciones  los procesos continúan realizándose de una manera manual , lo 
+que genera manejo  del tiempo ineficiente en los altos tiempos operativos , 
+errores humanos  y dificultades en el manejo  eficiente de la información.  
+Bajo esta problemática , surge la necesidad de implementar herramientas 
+tecnológicas que permiten automatizar la clasificación  documental mediante el 
+uso de inteligencia artificial y técnicas de procesamiento natural. E l PNL 
+constituye una rama de la inteligencia artificial  enfocada en permitir que los 
+computadores comprendan , interpreten y procesen lenguaje humano de manera 
+automática.  
+El proyecto tiene como finalidad desarrollar un sistema inteligente  de 
+clasificación  documental  basado  en técnicas de minería de texto , 
+representación vectorial TF -IDF y modelos de Machine Learning  supervisado . 
+El sistema permite clasificar documentos de manera automática según su contenido textual , lo cual integra funcionalidades de lectura automática de 
+archivos Pdf y Word , Dashboard analítico y visualización de palabras relevantes 
+y explicabilidad del mod elo. 
+ El proyecto   fue fundamentado en diversos conceptos teóricos  relacionados 
+con minería de texto , clasificación automática y procesamiento documental. 
+Según Marin -Alvarez  et al. (2020) , las técnicas de representación 
+semiautomática de modelo conceptuales han permitido estructurar información 
+textual  proveniente de documentos escritos en lenguaje natural . A su vez  
+Lezcano et al. (2015),   destacan la importancia del procesamiento lingüístico  
+para automatizar procesos relacionados con extracción  y clasificación de la 
+información .  
+Este proyecto también se justifica desde mi punto de vista profesional y 
+organizacional , ya que nos permite reducir significativamente tiempos de 
+clasificación, optimizar procesos administrativos y disminuir errores asociados 
+a la Manipulacion manual de documentos.  
+Objetivo general  
+Desarrollar  un sistema inteligente  de clasificación documental   utilizando 
+técnicas de procesamiento de lenguaje natural y machine learning.  
+Objetivos específicos  
+• Implementar técnicas de limpieza y preprocesamiento textual.  • Aplicar representación vectorial mediante TF -IDF. 
+• Entrenar modelos de Machine Learning para clasificación documental.  
+• Construir una interfaz gráfica utilizando Streamlit.  
+• Implementar módulos de visualización e inteligencia artificial 
+explicable.  
+Materiales y métodos . 
+ 
+Metodología de desarrollo  
+Este pro yecto fue desarrollado  utilizando la metodología incremental , 
+permitiendo construir un sistema por módulos independientes  que 
+posteriormente fueron integrados  en una sola aplicación funcional .  
+Inicialmente se realizó  la construcción  del dataset documental , el cual conti ene 
+diferentes categorías de documentos utilizados para entrenar  el modelo de 
+clasificación. Posteriormente se implementaron procesos de limpieza textual y 
+representación vectorial.  
+Herramientas y tecnologías utilizadas.  
+Herramienta  Función  
+Python  Lenguaje principal  
+Streamlit  Interfaz grafica  
+Scikit -learn  Machine learning  
+Pandas  Manipulacion de datos  
+Matplotlib  Visualización  
+Seaborn  Graficas estadísticas  
+Wordcloud  Nube de palabras  
+PyPDF2  Lectura PDF  
+Python -docx  Lectura Word  
+ 
+ Procesamiento textual.  
+Se implementaron  diferentes técnicas de procesamiento  para mejorar la 
+calidad del texto  antes del entrenamiento del modelo.  Entre las técnicas utilizadas  se encuentran:  
+• Conversión a minúsculas.  
+• Eliminación de caracteres especiales.  
+• Eliminación de signos de puntuación.  
+• Tokenizacion.  
+• Normalización textual.  
+• Eliminación de espacios innecesarios.  
+Estas técnicas permitieron  mejorar la calidad semántica de los datos utilizados 
+por modelo.  
+Representación vectorial TF -IDF 
+La técnica TF -IDF fue utilizada para convertir los textos  en vectores numéricos 
+interpretables por los modelos de Machine learning.  
+ 
+TF-IDF permitió identificar las palabras más relevantes dentro de cada 
+documento, asignando mayor peso a términos significativos.  
+Entrenamiento del modelo  
+El sistema se entreno utilizando algoritmos supervisados de clasificación  
+documental , ente los modelos que se evaluaron esta:  
+• Logistic Regression  
+• Random Forest  
+• Naive Bayes  
+• Support Vector Machine (SVM)  
+De manera posterior, se seleccionó   automáticamente le modelo con mejor 
+desempeño  según métricas de accuracy.  
+ 
+Interfaz grafica . 
+La interfaz  grafica fue desarrollada  utilizando Streamlit, perm itiendo:  
+• Cargar archivos PDF y Word.  
+• Ingresar texto manualmente.  
+• Visualizar categorías predichas.  
+• Mostrar probabilidades.  
+• Visualizar Dashboard  analítico.  
+• Mostrar Wordcloud . 
+• Mostrar explicabilidad del modelo.   
+Resultados  
+Los resultados  obtenidos  durante el desarrollo  de este proyecto  permiten 
+evidenciar  que las técnicas de procesamiento  de lenguaje natural aplicadas  a la 
+clasificación  documental permiten automatizar procesos organizacionales de 
+forma eficiente.  
+El sistema logro  clasificar documentos automáticamente utilizando modelos de 
+machine learning supervisado . Las métricas obtenidas  muestran un 
+comportamiento  estable del modelo y una adecuada capacidad de 
+generalización.  
+Métricas obtenidas.  
+Las principales métricas evaluadas fueron :  
+• Accuracy  
+• Precision  
+• Recall  
+• F1-score  
+Estas métricas permitieron validar el desempeño del modelo durante las pruebas 
+realizadas.  
+ Matriz de confusión  
+La matriz de confusión  permitió  visualizar el comportamiento de las 
+predicciones realizadas  por el sistema.  
+ 
+ 
+Resultados  de clasificación.  
+El sistema logro identificar correctamente categorías documentales relacionadas 
+con documentos administrativos , jurídicos y académicos, a su vez , el módulo 
+de inteligencia artificial  explicable permitió  identificar las palabras mas 
+relevantes detectadas durante la clasificación, incrementando la 
+interpretabilidad del sistema.  
+El Dashboard analítico permite visualizar estadísticas relacionadas con 
+clasificaciones realizadas y generar reportes exportables.  
+Discusión.  
+Los resultados que se obtuvieron  demuestra que el uso de técnicas de 
+procesamiento de lenguaje natural  representan un excelente alternativa para 
+automatizar procesos documentales dentro de las organizaciones.  
+La implementación de TF -IDF  permito  representar adecuadamente la 
+información textual, facilitando el entrenamiento de modelos supervisados 
+capaces de identificar patrones lingüísticos  dentro de los documentos.  
+De manera adicional, la integración de modelos de machine learning  permitió 
+reducir significativamente la intervención manual  de tareas de clasificación 
+documental.  
+Uno de los principales  aportes de este proyecto corresponde a la integración de 
+módulos de explicabilidad e interfaces visuales, los cuales facilitan la 
+comprensión de las decisiones tomadas por el modelo.  
+Sin embargo, también se identifican limitaciones  relacionadas con el tamaño 
+del dataset y la diversidad documental utilizada durante el entrenamiento. En futuras versiones del sistema se recomienda ampliar el conjunto de datos e 
+incorporar modelos avanzados basados en redes neuronales y transformes.  
+CONCLUSIONES  
+• El procesamiento de lenguaje natural  permitió automatizar 
+satisfactoriamente la clasificación documental.  
+• La técnica TF -IDF logro representar adecuadamente la información 
+textual  utilizada durante el entrenamiento.  
+• Los modelos  de machine learning  mostraron  un comportamiento 
+estable y eficiente para tareas de clasificación documental.  
+• La interfaz desarrollada en Streamlit permitió construir una aplicación 
+funcional, intuitiva y visualmente amigable.  
+• El módulo de inteligencia artificial  explicable facilito  la interpretación  
+de los resultados generados por el sistema.  
+• El proyecto demuestra el potencial del PLN dentro de procesos 
+organizacionales relacionados con gestión documental.  
+• Link web: http://localhost:8501  
+ 
+ 
+ 
+ 
+  
+ 
+ 
+REFERENCIAS BIBLIOGRÁFICAS  
+ 
+Marín -Alvarez, D., Manrique -Losada, B., & Bernardo Quintero, J. (2020). 
+Método para la representación semi -automática de modelos 
+conceptuales desde documentos de negocio escritos en lenguaje 
+natural en español. INGENIARE - Revista Chilena de Ingeniería, 
+28(4), 565 –584. 
+Lezcano R., L. A., Guzmán L., J. A., & Gómez A., S. A. (2015). Extraction 
+of goals and their classification in the KAOS model using natural 
+language processing. INGENIARE - Revista Chilena de Ingeniería, 
+23(1), 59 –66. 
+Niño Zambrano, M. A., López Gómez, I. D., Andrade, C., Cobos Lozada, 
+C. A., & Fabregat Gesa, R. (2012). Modelo Semántica de Expansión de Consultas para la Búsqueda Web (MSEC). UIS Ingenierías, 
+11(1), 11 –20. 
+Rodríguez, T., & Aguilar, J. (2017). Implementación del Marco Ontológico 
+Dinámico Semántico. INGENIARE - Revista Chilena de Ingeniería, 
+25(3), 430 –448. 
+Scikit -learn Developers. (2025). Scikit -learn Documentation.  
+Streamlit Developers. (2025). Streamlit Documentation.  
+ 
+1. La técnica TF -IDF fue utilizada para convertir los textos en vectores 
+numéricos interpretables por los modelos de Machine Learning.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ ",Administrativo,97.8
+2026-05-21 08:40:50.077778," 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+FORMATO DE INSCRIPCION  JUEGOS  NACIONALES  2026 
+ 
+SINTRAUNICOL  SUBDIRECTIVA  UNIVERSIDAD  PEDAGÓGICA  Y TECNOLÓGICA  DE COLOMBIA  
+DEPORTE   
+CATEGORIA   
+APELLIDOS   FECHA DE 
+NACIMIENTO   
+NOMBRES   
+RH  
+NRO. 
+DOCUMENTO   
+EMAIL   
+NRO. 
+CELULAR   FEC.  INGRESO. 
+UPTC   
+TIP. 
+VINCULACION   
+EPS  
+DEPENDENCIA 
+SECCIONAL   
+ARL  
+TALLA     
+NOTA:  PARA  NATACIÓN  Y ATLETISMO  ESPECIFICAR  PRUEBAS.  MÁXIMO  3. SOLO  SE PUEDE 
+INSCRIBIR EN UN DEPORTE DE CONJUNTO Y UNO INDIVIDUAL.  
+ANEXAR:  
+ CERTIFICADO MEDICO  
+ FOTO  3X4 A COLOR  
+ 
+ 
+Firma  deportista  Fecha  de diligenciamiento  
+ 
+ 
+ 
+LIDIA  YANETH  BONILLA  CRUZ  PEDRO  ALONSO  ISAQUITA  PINZÓN  
+Secretaria  de Bienestar  Deporte  y Cultura  Presidente  
+ 
+ ",Academico,91.81
+2026-05-21 08:41:56.240761,"Johanna Araque <johanna.araque03@gmail.com>PSE - Transacción Aprobada 
+ CUS 302880999<serviciopse@achcolombia.com.co>mar, may 12, 3:46 p.m.Para: <johanna.araque03@gmail.com>
+¡Hola, Eyda Johanna Araque Barrera!
+ Los siguientes son los datos de tu transacción:Valor: $ 20.000Empresa: Banco Davivienda SADescripción: Depósito a Daviplata por PSEFecha de la transacción: 12/05/2026CUS: 302880999Gracias por utilizar nuestro servicio.      Ten encuenta estos tips de seguridad:
+Usa dispositivos personales o de confianza para realizar tus pagos.
+No abras enlaces sospechosos.
+Cambia tus contraseñas con regularidad.
+Digita manualmente la URL del portal de tu entidad financiera.
+Recuerda que PSE nunca te contactará para solicitarte información personal.                                                                                                                      
+                                                                                                                                                                                                    
+",Talento_Humano,86.55
+2026-05-21 09:11:57.553396,"República  de Colombia
+MINISTERIO  DE SALUD  Y PROTECCIÓN  SOCIAL
+)14 MAY 2026RESOLUCIÓN  NÚMEROQ00948  DE 2026 
+(
+EL MINISTRO  DE SALUD  Y PROTECCIÓN  SOCIAL
+En ejercicio  de las facultades  legales  y reglamentarias,  en especial  las conferidas  
+por los artículos  173, numeral  3 de la Ley 100 de 1993 y 15 de la Ley 1966 de 2019
+y.
+CONSIDERANDO
+Que, en desarrollo  del artículo  15 de la Ley 1966 de 2019, el cual estableció  que los 
+prestadores  de salud  deben  generar  factura  electrónica  por el cobro  de los servicios  y 
+tecnologías  en salud, indicando  que la misma  deberá  ser presentada  ante la Unidad  
+Administrativa  Especial  Dirección  de Impuestos  y Aduanas  Nacionales  (DIAN),  el 
+Ministerio  de Salud y Protección  Social  expidió  las Resoluciones  2275 de 2023 558 
+de 2024 y 1884 de 2024.
+Que las precitadas  normas  constituyen  el marco  operativo  a partir  del cual el Ministerio  
+de Salud y Protección  Social  implementó  el proceso  de facturación  electrónica  en el 
+sector  salud, integrando  la extensión  salud  de la Factura  Electrónica  de Venta  (FEV),  
+habilitada  por la Unidad  Administrativa  Especial  Dirección  de Impuestos  y Aduanas  
+Nacionales  (DIAN),  con el Registro  Individual  de Prestación  de Servicios  de Salud  
+(RIPS), información  generada  por los prestadores  de servicios  de salud y los 
+proveedores  de tecnologías  en salud en el proceso  de cobro por la prestación  o 
+provisión  de servicios  y tecnologías  a las Entidades  Responsables  de Pago (ERP)  y 
+demás  pagadores,  conforme  al estándar  definido  por el Ministerio.  En virtud de lo 
+anterior, los participantes  del sistema de salud han implementado  las 
+correspondientes  adecuaciones  en sus sistemas  de información.
+Que, mediante  la Resolución  1884 de 2024 que modificó  la Resolución  2275 de 2023,  
+se determinó  una implementación  gradual  conforme  las capacidades  institucionales  de 
+los Prestadores  de Servicios  de Salud (PSS)  y Proveedores  de Tecnología  en Salud  
+(PTS),  y se ajustó  el Anexo  Técnico  2 de la Factura  Electrónica  de Venta  (FEV)  en salud  
+para permitir  el diligenciamiento  de anticipos  y el recaudo  de pagos  moderadores  como  
+recursos  recibidos  a favor  de terceros.
+Que durante  el período  que lleva en operación  el mecanismo  único de validación  se 
+han detectado  necesidades  de ajuste a fin de garantizar  mayor operatividad  y 
+centrahzar  los esfuerzos  en la prestación  de servicios  de salud  financiados  con recursos  
+del Sistema  General  de Seguridad  Social en Salud, necesidades  entre las cuales  sePor la cual se reglamenta  el Registro  Individual  de Prestación  de Servicios  de Salud  
+(RIPS)  como  soporte  de la Factura  Electrónica  de Venta  (FEV)  en salud se derogan  
+las Resoluciones  2275 de 2023, 558 y 1884 de 2024 y, se dictan  otras disposicioneswKateLZSKr
+RESOLUCIÓN  NÚMERO  000948 HOJA  N° 2
+En mérito  de lo expuesto,
+RESUELVE
+Capítulo  1. GeneralidadesQue, mediante  Resolución  35379 del 10 de junio de 2025, la Superintendencia  de 
+Industria  y Comercio  autorizó la negociación  conjunta  para la adquisición  de 
+medicamentos,  dispositivos  médicos  y Alimentos  de Propósito  Médico Especial  
+(ARME),  por parte de las Entidades  Promotoras  de Salud  (EPS)  para la compra  directa  
+de medicamentos,  dispositivos  médicos  y otros insumos  con fabricantes,  importadores  
+o titulares  de registro  sanitario,  resultando  procedente  incluir tales facturas  en el 
+Mecanismo  Único  de Validación  de FEV- RIPS,  dado que estas  tecnologías  tienen  una 
+importante  participación  en la canasta  de servicios  de salud entre los agentes  del 
+sector.
+Que, mediante  Resolución  1962 de 2025, este Ministerio  reglamentó  el Sistema  de 
+Información  Integral  Financiero  y Asistencia!  (SIIFA) y dispuso  la inclusión  en los 
+módulos  que lo integran  de las transacciones  entre las Entidades  Responsables  de 
+Pago (ERP) y los fabricantes,  importadores,  o titulares  de registro sanitario  de 
+medicamentos,  dispositivos  médicos  y otros insumes,  haciéndose  necesario  establecer  
+el módulo  a través  de los cuales  estas  entidades  transmitirán  sus facturas  al Mecanismo  
+Único de Validación,  dado que al tratarse  de compras  masivas  y no de dispensación  
+individual,  no se soportan  en los Registros  Individuales  de Prestación  de Servicios  
+(RIPS).Que dentro  de los campos  adicionales  de la Factura  Electrónica  de Venta (FEV) en 
+salud se citan objetos  que ya se encuentran  en la extensión  UBL definida  en el Anexo  
+Técnico,  versión  1.9 de la factura  electrónica  incorporada  en la Resolución  165 de 2023  
+emitida  por la Unidad Administrativa  Especial  Dirección  de Impuestos  y Aduanas  
+Nacionales  (DIAN), por lo cual se requiere  dar claridad  para que las entidades  
+facturadoras  y pagadoras  adopten  adecuadamente  las disposiciones  normativas.
+Artículo  1. Objeto.  La presente  resolución  tiene por objeto reglamentar  el Registro  
+Individual  de Prestación  de Servicios  de Salud (RIPS)  como soporte  de la Factura  
+Electrónica  de Venta (FEV) en salud y adoptar  los documentos  técnicos  que seQue, de acuerdo  con las circunstancias  anotadas  y con el fin de garantizar  agilidad  en 
+los ajustes  técnicos  que lleguen a requerirse,  el detalle de la información  a ser 
+reportada,  hoy incluida  en los Anexos  Técnicos  No. 1 y 2 de la Resolución  2275 de 
+2023 y sus modificatorias,  se dispondrá  como Documentos  Técnicos  1 y 2 a través  de 
+un enlace  ubicado  en la página  web de la Cartera  Ministerial,  de manera  que pueda  
+optimizarse  el mecanismo  único  de validación.encuentra  la exclusión  de algunos  tipos de entidades  del campo  de aplicación  previsto  
+en la Resolución  2275 de 2023, tales como centros  de cirugías  estéticas,  atenciones  
+excluidas  de la financiación  con recursos  públicos  y los centros  de investigación,  pues  
+no se encuentran  financiados  con recursos del sistema de salud y existe  
+confidencialidad  en ellos, guardándose  custodia  de la identificación  y atención  de los 
+individuos  investigados.  Así como los centros  de reconocimiento  de conductores,  pues 
+es el usuario  quien asume  el costo directamente  y no se genera  un diagnóstico  y, las 
+atenciones  de medicina  alternativa  excluidas  de la financiación  con recursos  públicos.DE 14 MAY 2026-
+Continuación  de la resolución:  “Por la cual se reglamenta  el Registro  Individual  de Prestación  de Servicios  de 
+Salud  (RIPS)  como  soporte  de la Factura  Electrónica  de Venta (FEV) en salud, se derogan  las Resoluciones  2275 
+de 2023, 558 y 1884 de 2024 y, se dictan  otras disposiciones ”
+HOJA  N° 3
+en la presente
+1.
+Estas entidades  deberán  incorporar  y usar en sus procesos  de información,  los 
+contenidos  y estructura  definidos  en el Registro  Individual  de Prestación  de Servicios  
+de Salud (RIPS)  y en la Factura  Electrónica  de Venta (FEV) en salud, con excepción  
+de los fabricantes,  importadores  y titulares  de registro  sanitario  enunciados  en el 
+numeral  4 del presente  artículo.1. Documento  técnico  1: “ESPECIFICACIONES  TÉCNICAS  DE LOS CAMPOS  DE 
+DATOS  Y LAS REGLAS  DE VALIDACIÓN  DEL RIPS COMO  SOPORTE  DE LA 
+FEV EN SALUD ”
+2. Documento  técnico 2: “CAMPOS  DE DATOS DEL SECTOR  SALUD  
+ADICIONALES  A LA GENERACION  DE LA FEV ”
+Artículo  2. Ámbito  de Aplicación.  Las disposiciones  contenidas  
+resolución  son aplicables  a:relacionan  a continuación,  los cuales  serán publicados  en la página  web del Ministerio  
+de Salud  y Protección  Social:o°,nt!n/o^o  n de la resolución:  “Por la cual se reglamenta  el Registro  Individual  de Prestación  de Servicios  de 
+como  s°Porte de la Factura Electrónica  de Venta (FEV)  en salud, se derogan  las Resoluciones  2275 
+de 2023, 558 y 1884 de 2024  y, se dictan  otras  disposiciones ”RESOLUCIÓN  NÚMERO  000948  DE 1 4 MAY 202^
+Parágrafo  1. Las disposiciones  establecidas  en la presente  resolución  respecto  a la 
+factura  de venta en salud y el Registro  Individual  de Prestación  de Servicios  de Salud  
+(RIPS),  no serán  aplicables  para los centros  de reconocimiento  de conductores,  centros  
+de investigación,  servicios  de cirugía  estética  y de medicina  alternativa  que no se 
+financien  con recursos  públicos,  sin perjuicio  de que para estos servicios  se deban  
+expedir  facturas  electrónicas  de venta, conforme  la normatividad  de la Unidad  
+Administrativa  Especial  Dirección  de Impuestos  y Aduanas  Nacionales  (DIAN).Los prestadores  de servicios  de salud, esto es, Instituciones  Prestadoras  de 
+Servicios  de Salud (IPS), profesionales  independientes  y empresas  de transporte  
+asistencial  de pacientes.
+2. Los proveedores  de tecnologías  en salud.
+3. Otras  entidades  que en el marco  de sus funciones  legales  deban  entregar  los datos  
+del Registro  Individual  de Prestación  de Servicios  de Salud (RIPS)  al Sistema  de 
+General  de Seguridad  Social  en Salud,  tales como,  las de objeto  social  diferente  a 
+la prestación  de servicios  de salud, aunque  no expidan  facturas  de venta por sus 
+servicios.
+4. Los fabricantes,  importadores  y titulares  de registro  sanitario  que realicen  ventas  
+masivas  de medicamentos,  dispositivos  o insumes  a las Entidades  Promotoras  de 
+Salud (EPS)  y otros pagadores,  para ser entregados  a los gestores  farmacéuticos  
+o a los Prestadores  de Servicios  de Salud (PSS),  para su posterior  dispensación  o 
+administración  a los afiliados.
+5. Entidades  Responsables  de Pago (ERP):  Entidades  Promotoras  de Salud (EPS),  
+Entidades  Adaptadas  (EA), Entidades  Territoriales  (ET), Administradoras  dé 
+Riesgos  Laborales  (ARL)  en el componente  salud,  el Fondo  Nacional  de Salud de 
+las Personas  Privadas  de la Libertad  y los Administradores  de los Regímenes  
+Especial  y de Excepción,  cuando operen como pagadores  de servicios  y 
+tecnologías  a prestadores  o proveedores  en los términos  del artículo  2.5.3.4.1.2.  
+del Decreto  780 de 2016.
+6. Otros pagadores:  Compañías  de seguros  autorizadas  para ofrecer  pólizas  del 
+Seguro  Obligatorio  de Accidentes  de Tránsito  (SOAT)  y las entidades  que ofrecen  
+planes  voluntarios  de salud.
+7. La Administradora  de los Recursos  del Sistema  General  de Seguridad  Social  en 
+Salud  (ADRES).
+14 liftY 2026-H0JAN°4
+2.2.Archivo  JSON del Registro  Individual  de Prestación  de Servicios  de Salud  
+(RIPS)  que soporta  la Factura  de Venta Electrónica  (FEV) en salud o sus 
+documentos  nota débito o nota crédito, así como los archivos  JSON  
+relacionados  con notas de ajuste del Registro  Individual  de Prestación  de 
+Servicios  de Salud (RIPS),  cuando  corresponda.Artículo  3. Definiciones.  Para efectos  de la presente  resolución,  se definen los 
+siguientes  términos:
+Las entidades  que en el marco  de sus funciones  y competencias  deban  entregar  
+los datos del Registro  Individual  de Prestación  de Servicios  de Salud (RIPS)  al 
+Sistema  General  de Seguridad  Social  en Salud,  que no emitan  factura  de venta  
+en salud,  solo deberán  transmitir  al mecanismo  único  de validación  del Ministerio,Parágrafo  3. Para los efectos  previstos  en la presente  resolución,  se entienden  como  
+facturadores  electrónicos  del sector  salud,  las entidades  encargadas  de la prestación  o 
+provisión  de servicios  y tecnologías  de salud relacionadas  en los numerales  1 y 2 de 
+este artículo.
+2. Conjunto  de archivos  de información:  archivos  de información  que deben  ser 
+transmitidos  por los facturadores  electrónicos  del sector  salud al Ministerio  para ser 
+validados  por el mecanismo  único de validación  dispuesto  por este, que 
+corresponden  a:1. Código  Unico de Validación  (CUV): corresponde  a una cadena  alfanumérica  
+cifrada,  que certifica  la aprobación  resultante  de la validación  única del Registro  
+Individual  de Prestación  de Servicios  de Salud  (RIPS),  que se obtiene  cuando  este 
+registro  cumple  todas las reglas de validación  obligatorias  y de relación  con la 
+Factura  Electrónica  de Venta (FEV) en salud y demás  documentos  electrónicos,  
+cuando  aplique.  El mecanismo  único de validación  incluirá  el Código  Único de 
+Validación  (CUV) en el conjunto  de información  validada.  Esta validación  es 
+requisito  obligatorio  para la radicación  de las facturas  electrónicas  de venta  en salud  
+ante las entidades  pagadoras.  Los pagadores  no podrán  recibir  ni tramitar  facturas  
+que carezcan  del Código  Único de Validación  (CUV), ni podrán  informar  como  
+costos  de la atención  con cargo  a la Unidad  de Pago  por Capitación  (UPC)  aquellas  
+facturas  que no cumplan  este requisito.
+2.1 .Archivo  XML de las facturas  electrónicas  de venta  en salud,  las notas  débito  
+y/o notas crédito validadas  previamente  por la Unidad Administrativa  
+Especial  Dirección  de Impuestos  y Aduanas  Nacionales  (DIAN)  dentro  del 
+contenedor  electrónico.  Los fabricantes,  importadores  de medicamentos,  
+insumes  o dispositivos  médicos  y los titulares  de registros  sanitarios  que 
+vendan  directamente  a las Entidades  Promotoras  de Salud (EPS) estos  
+insumes  para su posterior  dispensación  por los Gestores  Farmacéuticos  
+deberán  expedir  facturas  electrónicas  comerciales  (sin campos  adicionales  
+del sector salud) y deberán  transmitirlas  por el mecanismo  único de 
+validación  sin que les sea exigible  soportarlas  en los Registros  Individuales  
+de Prestación  de Servicios  de Salud (RIPS).e° (nt¿n/o^o 1n de la reso,ución:  “Por /a cual se reglamenta  el Registro  Individual  de Prestación  de Servicios  de 
+IFEV>  “RESOLUCIÓN  NÚMERO  000948  DE
+Parágrafo  2. Para los eventos en que sea obligada  a efectuar  el pago, la 
+Administradora  de los Recursos  del Sistema  General  de Seguridad  Social en Salud  
+(ADRES)  podrá  tenerse  como  otro pagador.
+HOJA  N° 5
+6. Nota ajuste  del Registro  Individual  de Prestación  de Servicios  de Salud  
+(RIPS):  tipo de nota mediante  la cual se actualizan  datos  del Registro  Individual  
+de Prestación  de Servicios  de Salud (RIPS),  en los casos  en los cuales  no hay 
+afectación  en el campo de datos de valor monetario  total y no procede  la 
+generación  de notas crédito  o notas débito  a la factura  electrónica  de venta en 
+salud.4. Factura  sin contrato:  para los efectos  del presente  acto administrativo,  se 
+consideran  excepciones  a la obligatoriedad  de contar  con el Código  Único de 
+Contrato  (CUCON),  situaciones  como la atención  de urgencias  prestada  sin 
+contrato  vigente,  atención  a cargo de la Administradora  de los Recursos  del 
+Sistema  General  de Seguridad  Social en Salud (ADRES)  o de aseguradora  
+Seguro  Obligatorio  de Accidentes  de Tránsito  (SOAT),  atención  en salud por 
+fallos de tutela, órdenes  judiciales  y otras que se precisan  en el Documento  
+Técnico  2 a que se refiere  el artículo  12 de la presente  resolución.
+5. Mecanismo  único  de validación:  mecanismo  dispuesto  por este Ministerio,  el 
+cual desarrolla  las reglas de estructura,  contenido  y relación  de los datos del 
+Registro  Individual  de Prestación  de Servicios  de Salud  (RIPS),  como  soporte  de 
+la Factura  Electrónica  de Venta  (FEV)  en salud y de los documentos  electrónicos  
+asociados  a la misma,  notas  crédito  y notas  débito,  a las notas  ajuste  del Registro  
+Individual  de Prestación  de Servicios  de Salud (RIPS)  y el Registro  Individual  de 
+Prestación  de Servicios  de Salud (RIPS)  sin factura  o documento  electrónico,  
+según el caso. También  validará  las facturas  convencionales  sin Registro  
+Individual  de Prestación  de Servicios  de Salud  (RIPS)  que emitan  los fabricantes,  
+importadores  o titulares  de registro  sanitario  cuando  realizan  ventas  directas  de 
+medicamentos,  dispositivos  médicos  o Alimentos  para Propósitos  Médicos  
+Especiales  (APME) a las Entidades  Promotoras  de Salud (EPS) u otros  
+pagadores  para que los gestores  farmacéuticos  o prestadores  los dispensen  
+ambulatoriamente  a sus afiliados.el archivo  JSON del Registro  Individual  de Prestación  de Servicios  de Salud  
+(RIPS).
+3. Código Único de Contrato  (CUCON):  es un identificador  generado  
+automáticamente  por el Sistema  Integral  de Información  Financiero  y Asistencial  
+(SIIFA) al momento  del cargue del contrato.  Corresponde  a una cadena  
+alfanumérica  de 64 caracteres  en formato  hexadecimal,  generada  mediante  el 
+algoritmo  de hash criptográfico  SHA-256,  lo que garantiza  la unicidad,  integridad  
+y trazabilidad  del registro,  permitiendo  su identificación,  consulta,  seguimiento  y 
+gestión  durante  todo el ciclo de vida del contrato  dentro  del sistema.
+7. Prestación  individual  de servicios  y tecnologías  de salud: conjunto  de 
+actividades,  intervenciones,  insumos,  medicamentos,  dispositivos  médicos,  y 
+procedimientos  usados para la atención  en salud, así como los sistemas  
+organizativos  y de soporte  para el efecto.
+8. Reglas  de validación:  condiciones  de carácter  técnico  y funcional  establecidas  
+por el Ministerio  de Salud y Protección  Social, aplicables  a la estructura,  
+contenido  y relación  de los campos  de datos  del Registro  Individual  de Prestación  
+de Servicios  de Salud (RIPS)  como soporte  de la Factura  Electrónica  de Venta  
+(FEV)  en salud,  para garantizar  la consistencia  y razonabilidad  de la información.  
+Estas reglas tendrán  como resultado  la generación  del Código Único deRESOLUCIÓN  NÚMERO 000948  DE 1 4 MAY 2026
+Continuación  de la resolución:  ""Por la cual se reglamenta  el Registro  Individual  de Prestación  de Servicios  de 
+Salud  (RIPS)  como  soporte  de la Factura  Electrónica  de Venta (FEV) en salud, se derogan  las Resoluciones  2275 
+de 2023, 558 y 1884 de 2024  y, se dictan  otras disposiciones""
+RESOLUCIÓN  NÚMERO  000948DE HOJA  N° 6
+Capítulo  2
+1. Datos  relativos  a la transacción.
+2. Datos  relativos  a los usuarios.
+3. Datos  relativos  a los servicios  y tecnologías  de salud y a los valores  facturados:Proceso  de generación  del Registro  Individual  de Prestación  de Servicios  de 
+Salud  (RIPS),  como  soporte  de la Factura  Electrónica  de Venta  (FEV)  en salud
+Artículo  5. Datos del Registro  individual  de Prestación  de Servicios  de Salud  
+(RIPS).  Los destinatarios  de la presente  resolución  deben utilizar  los datos que se 
+refieren  a la transacción,  al servicio,  a la tecnología  de salud  y al valor  facturado,  así:Artículo  4. Registro  Individual  de Prestación  de Servicios  de Salud  (RIPS).  El 
+Registro  Individual  de Prestación  de Servicios  de Salud (RIPS)  es el conjunto  de datos  
+que contiene  la información  relacionada  con la prestación  o provisión  de servicios  y 
+tecnologías  de salud al usuario.  El Registro  Individual  de Prestación  de Servicios  de 
+Salud (RIPS)  se utilizará  para los procesos  de prestación  o provisión  de servicios  y 
+tecnologías  de salud y su facturación,  así como para los procesos  de dirección,  
+regulación  y control.
+El Registro  Individual  de Prestación  de Servicios  de Salud (RIPS) será generado,  
+validado  y enviado  como soporte  de la factura  de venta por parte de los facturadores  
+electrónicos  del sector  salud, esto es, prestadores  de servicios  de salud, proveedores  
+de tecnologías  en salud y otras entidades  que en el marco  de sus funciones  legales  
+deban  entregarlos.9. Validación  única: proceso  de revisión  de los datos contenidos  en el Registro  
+Individual  de Prestación  de Servicios  de Salud (RIPS)  y su consistencia  con las 
+variables  comunes  de la Factura  Electrónica  de Venta  (FEV)  en salud, realizado  
+por el facturador  electrónico  en salud con el propósito  de obtener  el certificado  de 
+aprobación  del contenido,  la estructura  y las relaciones  entre los datos del 
+Registro  Individual  de Prestación  de Servicios  de Salud (RIPS)  como soporte  de 
+la factura.  Este proceso  se realiza de manera  previa al envío de la factura  
+electrónica  de venta en salud, el Registro  Individual  de Prestación  de Servicios  
+de Salud (RIPS)  y demás  soportes  a la entidad  responsable  de pago o demás  
+pagadores.
+10. Factura  electrónica  convencional  sin Registro  Individual  de Prestación  de 
+Servicios  de Salud (RIPS):  factura  convencional  (sin campos  adicionales  del 
+sector salud) que deben expedir  los fabricantes,  importadores  o titulares  de 
+registro  sanitario  cuando  venden  directamente  a las Entidades  Responsables  de 
+Pago (ERP)  para posterior  distribución  a través  de los Gestores  Farmacéuticos.  
+Estas  facturas  deben  ser expedidas  sin Registros  Individuales  de Prestación  de 
+Servicios  de Salud (RIPS)  y deben ser validadas  por el mecanismo  único de 
+validación  del Ministerio  de Salud y Protección  Social,  para lo cual se dispondrá  
+el módulo  correspondiente.  En los campos  generales  del XML de la factura,  
+deberán  registrar  el Código  Único  de Contrato  (CUCON).Validación  (CUV),  el rechazo  o la notificación  para las causas  que se especifican  
+en el documento  técnico correspondiente.  Las reglas de notificación  se 
+convertirán  gradualmente  en reglas de rechazo  para asegurar  una mejora  
+progresiva  de calidad.14 Mg 2026
+O°,nt2n/'^oo. n de la resolución:  ""Por /a cual se reglamenta  el Registro  Individual  de Prestación  de Servicios  de X C0.m°.s°po^e de la Factura  Electrónica Venta (FEV)  en salud, se derogan  las Resoluciones  2275 
+de 2023, 558 y 1884 de 2024  y, se dictan  otras disposiciones ”
+RESOLUCIÓN  NÚMERO  000948 14 MAY 2026- DE HOJA  N° 7
+3.Datos  de las consultas
+Datos  de los procedimientos
+Datos  de la urgencia  con observación
+Datos  de hospitalización
+Datos  de recién  nacidos  
+Datos  de medicamentos
+Datos  de otros servicios3.1.
+3.2.
+3.3.
+3.4.
+3.5.
+3.6.
+3.7.
+Una vez surtido  el proceso  de validación  previa  de la Unidad  Administrativa  Especial  
+Dirección  de Impuestos  y Aduanas  Nacionales  (DIAN)  a la factura  o a las notas  débito,  
+notas  crédito  y demás  documentos  electrónicos,  en los términos  previstos  en el artículo  
+12 de la presente  resolución  o la norma  que la modifique  o sustituya,  se deberá  realizar  
+la validación  única  del Registro  Individual  de Prestación  de Servicios  de Salud  (RIPS).
+Las reglas  únicas  de validación  del Registro  Individual  de Prestación  de Servicios  de 
+Salud  (RIPS)  según  las cuales  se evaluarán  las condiciones  de estructura,  contenido  y 
+relación  de la información  reportada,  se detallan  en el Documento  Técnico  Campos  y 
+Reglas  de Validación  del Registro  Individual  de Prestación  de Servicios  de Salud  (RIPS)  
+disponible en el link: https://www.sisproqov.co/central-
+financiamiento/Paqes /facturacion-electronica.aspx . por tanto, las Entidades  
+Responsables  de Pago (ERP)  y demás  pagadores  no podrán  usar, ni adicionar  otras  
+reglas o establecer  mecanismos  alternos  de validación,  como condición  para radicar  
+las facturas.Artículo  7. Flujo  y reporte  de datos.  El Registro  Individual  de Prestación  de Servicios  
+de Salud  (RIPS)  debe  generarse  juntamente  con la Factura  Electrónica  de Venta  (FEV)  
+en salud,  de las notas  débito,  notas  crédito  y demás  documentos  electrónicos,  cuando  
+aplique.
+Lo anterior  no excluye  la auditoria  sobre  los demás  soportes  que se adjunten,  definidos  
+en la Resolución  2284 de 2023.o0,nÜn/™^ n de ,a resolución:  “Por la cual se reglamenta  el Registro  Individual  de Prestación  de Servicios  de 
+^a i£,i„ PS>como  soPorte de la Factura  Electrónica  de Venta (FEV) en salud, se derogan  las Resoluciones  2275 
+de 2023, 558 y 1884 de 2024  y, se dictan  otras  disposiciones ”
+Parágrafo.  Los campos  que contienen  cada uno de los datos, asi como sus 
+características  se definen  en el Documento  Técnico  1 y podrán  ser actualizados  previa  
+revisión  del Comité  Técnico  del Sistema  Integral  de Información  Financiero  y Asistencial  
+(SIIFA)  creado  por la Resolución  2669 de 2025 y refrendación  del Viceministerio  de 
+Protección  Social.
+Artículo  6. Fuente  de los datos de la prestación  individual  de servicios  y 
+tecnologías  de salud.  Las fuentes  de datos  de la prestación  individual  de servicios  y 
+tecnologías  de salud son:
+1. La historia  clínica.
+2. El servicio  de información  de medicamentos  o el registro  de dispositivos  médicos  e 
+insumes  para el caso de proveedores  de tecnologías  en salud  
+La factura  de venta  de servicios  y tecnologías  de salud.
+Los campos  de datos relacionados  con la identificación  de los usuarios  y el detalle  
+administrativo  y asistencial  de los servicios  y tecnologías  de salud estarán  contenidos  
+en el Registro  Individual  de Prestación  de Servicios  de Salud (RIPS),  guardando  
+relación  con la factura,  los cuales  serán entregados  con los demás  soportes,  según  
+corresponda,  para la radicación  y el inicio del trámite  de auditoría  y pago de la factura  
+electrónica  de venta  en salud.
+RESOLUCIÓN  NÚMERO  0 0 0 948HOJA  N° 8
+Parágrafo  1. Los destinatarios  de este acto administrativo  no podrán  modificar,  reducir  
+o adicionar  los datos, ni la estructura  y especificaciones  técnicas  definidas  en el 
+Documento  Técnico  “Campos  y Reglas  de Validación  del RIPS  como  soporte  de la FEV 
+en Salud ”Si se realizan  notas  crédito,  notas  débito  y demás  instrumentos  electrónicos  a la Factura  
+Electrónica  de Venta (FEV) en salud, así como respuesta  a glosas, los Registros  
+Individuales  de Prestación  de Servicios  de Salud  (RIPS)  deberán  actualizarse  conforme  
+con dichos  documentos,  debiendo  enviarse  por parte de los obligados  a reportar  los 
+Registros  Individuales  de Prestación  de Servicios  de Salud  (RIPS)  que los soportan,  los 
+cuales surtirán el proceso de validación  única y disposición  a las Entidades  
+Responsables  de Pago (ERP)  y demás  pagadores.
+Cuando  se presenten  glosas  relacionadas  con la calidad  de la información  consignada  
+en los Registros  Individuales  de Prestación  de Servicios  de Salud  (RIPS),  conforme  con 
+lo definido  en el Manual  Único  de Devoluciones,  Glosas  y Respuestas,  que no afecten  
+el valor monetario  facturado  y, por ende, no generan  notas crédito  o notas débito,  el 
+facturador  electrónico  del sector  salud debe presentar  la respuesta  de glosas  mediante  
+notas  de ajuste  soportando  en los Registros  Individuales  de Prestación  de Servicios  de 
+Salud  (RIPS)  el(los)  dato(s)  que subsana(n)  la glosa.  La respuesta  a glosas  y el Registro  
+Individual  de Prestación  de Servicios  de Salud (RIPS)  soporte  de esta, serán  enviados  
+a la Entidad  Responsable  de Pago (ERP)  o demás  pagadores  y al Ministerio.Artículo  8. Obligatoriedad  del reporte.  Los facturadores  electrónicos  del sector  salud  
+deben reportar  el Registro  Individual  de Prestación  de Servicios  de Salud (RIPS)  de 
+todas las atenciones  de salud realizadas  como soporte  de la Factura  Electrónica  de 
+Venta (FEV) en salud, con validación  previa de la Unidad  Administrativa  Especial  
+Dirección  de Impuestos  y Aduanas  Nacionales  (DIAN),  en los términos  previstos  en el 
+artículo  12 de la presente  resolución.
+Parágrafo  2. Las Entidades  Responsables  de Pago (ERP) y demás  pagadores  no 
+podrán  solicitar  estadísticas  o reportes  consolidados  que puedan  ser obtenidos  a partir  
+de los datos  definidos  en esta resolución.Las entidades  con objeto  social diferente  y demás  entidades  obligadas  a reportar  el 
+Registro  Individual  de Prestación  de Servicios  de Salud (RIPS)  sin factura,  deberán  
+adelantar  la transmisión  de información  ante el mecanismo  único de validación  de 
+acuerdo  con la realización  de sus actividades,  mínimo  de manera  diaria  y máximo  de 
+manera  mensual,  en este último  caso dentro  de los 5 primeros  días calendario  del mes 
+siguiente  al objeto  de reporte.
+Parágrafo  3. Para efectos  del reporte  del Registro  Individual  de Prestación  de Servicios  
+de Salud  (RIPS),  en los contratos  bajo la modalidad  de pago  por capitación,  las Facturas  
+Electrónicas  de Venta  (FEV)  en salud deberán  cumplir  con lo dispuesto  en el parágrafo  
+2 del artículo  14 de la presente  resolución.
+Parágrafo  4. Para efectos  del reporte  de intervenciones  colectivas  o de gestión  en 
+salud pública,  no será exigible  la generación  ni el reporte  del Registro  Individual  de 
+Prestación  de Servicios  de Salud  (RIPS).  En consecuencia,  los prestadores  de servicios  
+de salud deberán  continuar  con la generación  de la facturación  convencional,  con 
+sujeción  a los mecanismos  de validación  establecidos  por la Unidad  Administrativa  
+Especial  Dirección  de Impuestos  y Aduanas  Nacionales  (DIAN).  Sin perjuicio  de lo 
+anterior,  para efectos  de seguimiento,  monitoreo  y evaluación  de la gestión  en saludDE' 14ML
+o°ntinn’nnn de ,a resolución:  ""Por cual se reglamenta  el Registro  Individual  de Prestación  de Servicios  de 
+. C°m^ S0,P°rte de la Factura  Electróni ^ Venta (FEV)  en salud, se derogan  las Resoluciones  2275
+de 2023, 558 y 1884 de 2024  y, se dictan  otras disposiciones ”
+HOJA  N° 9
+1.Generación  o actualización  de datos:  para lo cual deberán:
+2.
+3.1.3.Garantizar  la confiabilidad,  calidad,  oportunidad  y validez  de los datos,  así 
+como su respectivo  almacenamiento,  asegurando  que la información  sea 
+completa, íntegra, consistente  y verificable,  y que mantenga  
+correspondencia  con las fuentes  de información  disponibles  según  el rol del 
+actor, conservando  los soportes  que se encuentren  a su cargo y que 
+permitan  su validación  y auditoría  posterior.
+Transferencia  de archivos  al Ministerio:  luego de superar  la validación  local (no 
+admite motivos  de rechazo),  los facturadores  electrónicos  del sector salud  
+deberán  transmitir  al Ministerio  de Salud y Protección  de Social,  el Registro  
+Individual  de Prestación  de Servicios  de Salud (RIPS)  y el archivo  de la Factura1.1.Ajustar  las formas  de registro  manual  o automatizado,  que incluyan  los 
+contenidos  y la estructura  que se definen  en la presente  resolución.
+1.4. Garantizar  que al momento  de generar  o actualizar  el dato en su sistema  de 
+información,  éste cumpla  con las condiciones  de estructura,  contenido  y 
+relaciones  definidas  en la presente  resolución,  para su adecuada  validación.
+Validación  local: adelantar  el proceso  de verificación  de la consistencia  de los 
+datos, en cuanto  a los valores  que asumen  los campos  y las relaciones  del 
+Registro  Individual  de Prestación  de Servicios  de Salud (RIPS)  como soporte  a 
+las facturas  electrónicas  de venta en salud, previo a su transferencia.  De 
+identificarse  inconsistencias,  deberán  efectuarse  los ajustes  reportados  a cada  
+conjunto  de información  (XML-JSON).  Para el caso de las facturas  comerciales  
+expedidas  por los fabricantes,  importadores  o titulares  del registro  sanitario  de 
+medicamentos  o dispositivos  adquiridos  de forma directa por las Entidades  
+Promotoras  de Salud (EPS) y otros pagadores  para ser dispensados  por los 
+gestores  farmacéuticos,  se habilita un módulo  en el mecanismo  único de 
+validación  denominado  Factura sin Registro Individual  de Prestación  de 
+Servicios  de Salud (RIPS),  a través  del cual deberá  remitirse  el XML de esta 
+factura,  de modo  que quede  registrada  para su posterior  incorporación  al módulo  
+FEV-RIPS  del SIIFA. Por este módulo también  se validarán  las facturas  
+correspondientes  a las actividades  de salud pública  y del plan de intervenciones  
+colectivas.1.2. Hacer  el registro  de los datos con la prestación  o provisión  del servicio  o 
+tecnología  de salud.pública,  se dará aplicación  a lo dispuesto  en la Resolución  1597 de 2025, en especial  
+lo previsto  en su artículo  24, en relación  con el seguimiento  y evaluación  de la gestión  
+territorial  integral  en salud pública  y del Plan de Intervenciones  Colectivas  (PIC).
+En este marco,  el Ministerio  de Salud  y Protección  Social  definirá  e implementará  los 
+mecanismos  para el reporte  progresivo  de la información  requerida,  conforme  a los 
+lineamientos  que para el efecto  se expidan.Continuación  de la resolución:  ""Por la cual se reglamenta  el Registro  Individual  de Prestación  de Servicios  de 
+Salud  (RIPS)  como  soporte  de la Factura  Electrónica  de Venta (FEV) en salud, se derogan  las Resoluciones  2275 
+de 2023, 558 y 1884 de 2024  y, se dictan  otras disposiciones""
+Artículo  9. Procesos  informáticos  en los facturadores  electrónicos  en salud  y 
+demás  entidades  obligadas  a reportaren  el Registro  Individual  de Prestación  de 
+Servicios  de Salud (RIPS). Los obligados  a reportar  son responsables  de los 
+siguientes  procesos  informáticos:RESOLUCIÓN  NÚMERO 000948  DE
+RESOLUCIÓN  NÚMERO  00094814 MAY 2026DE HOJA  N° 10
+2.
+3.
+4.Parágrafo.  Las actualizaciones  de los documentos  técnicos  se publicarán  con 
+identificación  de versión,  fecha de publicación,  control  de cambios  y fecha de entrada  
+en aplicación.
+Artículo  11. Campos  de datos  del sector  salud  adicionales  a la FEV. Los campos  
+de datos adicionales,  en formato  XML, para la generación  de la factura  electrónica  de 
+venta  del sector  salud,  serán:Capítulo  3 
+Proceso  de facturación  electrónica  de venta  en el sector  salud4. La plataforma  del mecanismo  único de validación  en el Ministerio  realizará  las 
+validaciones  de segundo  nivel al conjunto  de información  y si estas son 
+superadas,  generará  y devolverá  el Código  Único  de Validación  (CUV)  mediante  
+el cual se certifica  la consistencia  y unicidad  de los archivos  recibidos.  De 
+identificar  inconsistencias,  deberán  efectuarse  los ajustes  reportados  a cada 
+conjunto  de información  (XML-JSON).
+1. Código  del prestador  de servicios  de salud: corresponde  al asignado  por la 
+Dirección  Departamental  o Distrital de Salud al momento  de realizar la 
+inscripción  en el Registro  Especial  de Prestadores  de Servicios  de Salud. Se 
+tomarán  los diez primeros  dígitos  para los prestadores.  Para otros facturadores  
+electrónicos  en salud tales como:  gestor  farmacéutico,  proveedor  de tecnología  
+en salud,  entre  otros, el código  será el que este Ministerio  asigne.
+Modalidad  de Pago: se seleccionará  una de las siguientes  opciones:  Pago  
+individual  por caso/Conjunto  Integral  de Atenciones/Paquete/Canasta;  Pago  
+Global  Prospectivo;  Pago por capitación  o Pago por evento.
+La cobertura  o plan de beneficios:  conforme  con las definiciones  establecidas  en 
+la tabla de referencia disponible en SISPRO:  
+https.7/web.s¡spro.gov.co/WebPubl¡co/Consultas/ConsultarDetalleReferenciaBa  
+s¡ca.aspx?Code=CoberturaPlanBeneficios
+Número  de contrato:  se exigirá  el Código  Único  de Contrato  (CUCON)  conforme  
+el cronograma  de implementación  del Sistema Integral de Información  
+Financiera  y Asistencial  (SIIFA)  establecido  en el artículo  9 de la ResoluciónElectrónica  de Venta (FEV) en salud con validación  previa de la Unidad  
+Administrativa  Especial  Dirección  de Impuestos  y Aduanas  Nacionales  (DIAN)  a 
+través  de la plataforma  del mecanismo  único  de validación  de que trata el artículo  
+10 de la presenta  resolución,  utilizando  la funcionalidad  establecida  para cada 
+una de la soluciones  (Cliente  Servidor  o API Docker).9°' de la resolución:  ""Por la cual se reglamenta  el Registro  Individual  de Prestación  de Servicios  de 
+^a X""~ S) COm° soporte  de la Factura  Electr6nica  da Venta (FEV)  en salud, se derogan  las Resoluciones  2275 
+de 2023, 558 y 1884 de 2024  y, se dictan  otras disposiciones""
+Artículo  10. Documento  Técnico  “Especificaciones  técnicas  de los campos  de 
+datos  y las reglas  de Validación  del RIPS  como  soporte  de la FEV  en Salud ”. Las 
+especificaciones  técnicas  de los campos  de datos  y las reglas  de validación  del Registro  
+Individual  de Prestación  de Servicios  de Salud (RIPS)  como soporte  de la Factura  
+Electrónica  de Venta en salud, serán dispuestas  en el micrositio  de Facturación  
+electrónica  de este ministerio,  disponible  en el link: https://www.sispro.Qov.co/central-  
+financiamiento/Pages/facturacion-electronica.aspx , cuyos  ajustes  se analizarán  en el 
+Comité  Técnico  del SIIFA creado  por la Resolución  1962 de 2025 expedida  por el 
+Ministerio  de Salud y Protección  Social  y serán refrendados  por el Viceministerio  de 
+Protección  Social.
+HOJA  N°11
+5.14 MAY 2026
+Continuación  de la resolución:  ‘‘Por la cual se reglamenta  el Registro  Individual  de Prestación  de Servicios  de 
+Salud  (RIPS)  como soporte  de la Factura  Electrónica  de Venta (FEV) en salud, se derogan  las Resoluciones  2275 
+de 2023, 558 y 1884 de 2024  y, se dictan  otras disposiciones""
+1962 de 2025. Si la atención  .que se factura  no requiere  contrato,  se deberá  
+diligenciar  la justificación  en el campo  que se señala  adelante.
+5. Número  de póliza:  corresponde  a la póliza  del Seguro  Obligatorio  de Accidentes  
+de Tránsito  (SOAT)  si se trata de una atención  con cargo a dicha póliza o el 
+número  de la póliza  en planes  voluntarios  de salud.
+6. Justificación  Factura  sin contrato:  deberá  diligenciarse  obligatoriamente  este 
+campo  con los valores  definidos  en la tabla de referencia  “Justificación  Facturas  
+sin contrato ” disponible  en el Sistema  Integral  de Información  de la Protección  
+Social  (SISPRO).
+En el campo  de notas  a nivel de línea de producto,  se deberá  registrar,  cuando  aplique,  
+los detalles de un mismo CUPS con distinta descripción  y distinto valor, esta 
+información  no será objeto  de validación  por parte del mecanismo  único de validación  
+y tendrá  carácter  informativo  para el pagador.
+La definición  de campos  de que tratan  los artículos  11 y 12 de la presente  resolución  y 
+su estructura  se desarrolla  y actualizará  en el Documento  Técnico  2, cuyos  ajustes  se 
+analizarán  en el Comité  Técnico  del Sistema  Integral  de Información  Financiera  y 
+Asistencial  (SIIFA)  creado  por la Resolución  1962 de 2025 del Ministerio  de Salud y 
+Protección  Social  y serán refrendados  por el Viceministerio  de Protección  Social.
+Artículo  13. Trazabilidad  de la factura  de venta  de los servicios  y tecnologías  de 
+salud.  La factura  electrónica  de venta con validación  previa,  las notas crédito  o notas  
+débito  y los demás  instrumentos  electrónicos,  que sean enviados  con el documento  
+electrónico  de validación  a la entidad  responsable  de pago u otro pagador,  deberán  
+transmitirse  a la plataforma  del mecanismo  único de validación  del Registro  Individual  
+de Prestación  de Servicios  de Salud  (RIPS)  como  soporte  de la Factura  Electrónica  deArtículo  12. Diligenciamiento  de otros  campos  en el anexo  técnico  de la factura.  
+Los siguientes  campos,  si bien no son adicionales  a los establecidos  en el Documento  
+Técnico  2, en virtud de la presente  resolución,  deberán  diligenciarse,  cuando  aplique,  
+para la generación  de la factura  electrónica  de venta  en salud:RESOLUCIÓN  NÚMERO  000948  DE
+1. Copago:  se diligencia  en el objeto  PrepaidPayment,  corresponde  a la sumatoria  
+de los copagos  por servicios  que fueron  registrados  en el Registro  Individual  de 
+Prestación  de Servicios  de Salud  (RIPS);
+2. Cuota  moderadora:  se diligencia  en el objeto  PrepaidPayment,  corresponde  a la 
+sumatoria  de los recaudos  por este concepto  registrados  en el Registro  Individual  
+de Prestación  de Servicios  de Salud (RIPS);
+3. Pagos  compartidos  en planes  voluntarios  de salud: se diligencia  en el objeto  
+PrepaidPayment  corresponde  a la sumatoria  del recaudo  que por este concepto  
+se hayan  registrado  en el Registro  Individual  de Prestación  de Servicios  de Salud  
+(RIPS).
+4. Anticipos:  se diligencia  en el objeto PrepaidPayment,  corresponde  al valor del 
+anticipo  realizado  y que deba ser amortizado  en esta factura conforme  las 
+definiciones  del acuerdo  de voluntades,
+Fecha  inicio del periodo  de facturación:  se diligencia  en el objeto  Invoice  period,  
+corresponde  a la fecha  y hora del primer  servicio  registrado  en esta factura,  sea 
+mono  o multiusuario.
+6. Fecha  fin del período  de facturación:  se diligencia  en el objeto Invoice  period,  
+corresponde  a la fecha  y hora del último  servicio  registrado  en esta factura,  sea 
+mono  o multiusuario.
+HOJA  N° 12
+Parágrafo  1. El facturador  electrónico  del sector  salud anulará  la factura  cuando  no se 
+haya realizado  la radicación  dentro  del plazo previsto  en este artículo,  procediendo  la 
+expedición  de una nueva  factura  para el cobro  de los servicios  y tecnologías  prestados.Parágrafo  2. Los campos  de datos relacionados  con la identificación  de los usuarios  y 
+el detalle  administrativo  y asistencia!  de los servicios  y tecnologías  de salud estarán  
+contenidos  en el Registro  Individual  de Prestación  de Servicios  de Salud (RIPS),  y 
+deberán  guardar  correspondencia  con la factura.
+Las entidades  pagadoras  deberán  generar  el número  único  de radicación  el que deberá  
+comunicarse  inmediatamente  al emisor  de la factura.  El número  único de radicación  
+será informado  al facturador  electrónico  del sector  salud conforme  con el mecanismo  
+establecido  por las partes y al Ministerio  de Salud y Protección  Social a través del 
+módulo  FEV-RIPS  del Sistema  Integral  de Información  Financiera  y Asistencial  (SIIFA),  
+de conformidad  con lo dispuesto  en la Resolución  1962 de 2025 expedida  por esté 
+Ministerio.Parágrafo  3. Las Entidades  Responsables  de Pago (ERP) y demás  pagadores  no 
+podrán  modificar  los campos  de datos  adicionales  definidos  en la presente  resolución,  
+ni exigir la inclusión  de nuevos,  so pena de las investigaciones  y medidas  que 
+determinen  las entidades  de inspección,  vigilancia  y control,  si a ello hubiere  lugar.
+Artículo  15. Proceso  de radicación  de la factura  electrónica  de venta  en saludante  
+la entidad  responsable  de pago  o demás  pagadores.  Los facturadores  electrónicos  
+del sector  salud disponen  de veintidós  (22) días hábiles,  contados  a partir de la fecha  
+de expedición  de la factura  electrónica  de venta con validación  previa de la Unidad  
+Administrativa  Especial  Dirección  de Impuestos  y Aduanas  Nacionales  (DIAN),  para la 
+radicación  ante las entidades  responsables  de pago o demás  pagadores,  de la factura  
+y el Registro  Individual  de Prestación  de Servicios  de Salud (RIPS)  aprobados  por el 
+mecanismo  único de validación  del Ministerio,  junto con los demás soportes  
+determinados  en el acuerdo  de voluntades,  sin sobrepasar  el listado  máximo  definido  
+en la normatividad  vigente.Parágrafo  1. En caso de no existir  acuerdo  de voluntades,  las Entidades  Responsables  
+de Pago (ERP) y demás  pagadores  deberán  suministrar  la información  que les sea 
+requerida  por los facturadores  electrónicos  del sector  salud,  para el diligenciamiento  de 
+los campos  de datos  adicionales  del sector  salud.Venta (FEV) en salud, para efectos  de la trazabilidad  de la factura  de venta de los 
+servicios  y tecnologías  de salud.
+Artículo  14. Fuente  de información  para el diligenciamiento  de los datos del 
+sector  salud  y el trámite  de la factura  electrónica  de venta  en salud.  La fuente  de 
+información  para el diligenciamiento  de los campos  de datos adicionales  del sector  
+salud  en el formato  XML,  será el Registro  Individual  de Prestación  de Servicios  de Salud  
+(RIPS)  y los acuerdos  de voluntades  suscritos  entre los facturadores  electrónicos  y las 
+Entidades  Promotoras  de Salud  (EPS),  Entidades  Adaptadas  (EA), Administradoras  de 
+Riesgos Laborales  (ARL) en el componente  salud, secretarias  de salud  
+departamentales,  distritales  o municipales  o las entidades  que hagan sus veces,  
+compañías  de seguros  autorizadas  para ofrecer  el Seguro  Obligatorio  de Accidentes  dé 
+Tránsito  (SOAT), entidades  que ofrecen planes voluntarios  de salud y demás  
+pagadores.14 MAY 2026
+e°,nt2n/o^c. n de 'a reso,uc Jón: “Porla  cual se reglamenta  el Registro  Individual  de Prestación  de Servicios  de 
+,FEV > “ 2275RESOLUCIÓN  NÚMERO  000948  DE
+RESOLUCIÓN  NÚMERO  000948HOJA  N° 13
+Artículo  16. Del mecanismo  único  de validación.  El mecanismo  único de validación  
+del Registro  Individual  de Prestación  de Servicios  de Salud  (RIPS)  se compone  de:
+16.1. Sistema  de información  de validación  y envío  de archivos
+16.2. Proceso  de registro  o actualización  de entidades.
+16.3. Proceso  de disposición  de datosDE 14 MAY 2026
+Artículo  17. Sistema  de información  de validación  del Registro  Individual  de 
+Prestación  de Servicios  de Salud  (RIPS)  y envío de archivos.  Corresponde  a la 
+solución  tecnológica  del mecanismo  único de validación  del Registro  Individual  de 
+Prestación  de Servicios  de Salud (RIPS),  desarrollada  por este Ministerio  para la 
+certificación  del cumplimiento  de las condiciones  técnicas  y requerimientos  funcionales,  
+establecidos  en la presente  resolución,  que permite la recepción,  validación  y 
+transmisión  del Registro  Individual  de Prestación  de Servicios  de Salud (RIPS),  como  
+soporte  de la Factura  Electrónica  de Venta (FEV) en Salud y de los documentos  
+electrónicos  asociados  a la misma,  notas  crédito  y notas  débito,  y las notas ajuste  del 
+Registro  Individual  de Prestación  de Servicios  de Salud (RIPS), o los Registros  
+Individuales  de Prestación  de Servicios  de Salud (RIPS)  sin factura,  y las facturas  sin 
+Registros  Individuales  de Prestación  de Servicios  de Salud (RIPS)  según  el caso, así 
+como  la generación  de reportes  del resultado  de las anteriores  actividades.Capítulo  4 
+Mecanismo  Único  de ValidaciónContinuación  de la resolución:  ""Por la cual se reglamenta  el Registro  Individual  de Prestación  de Servicios  de 
+Salud  (RIPS)  como  soporte  de la Factura  Electrónica  de Venta  (FEV)  en salud, se derogan  las Resoluciones  2275  
+de 2023, 558 y 1884 de 2024  y, se dictan  otras  disposiciones""
+Parágrafo  2. En los acuerdos  de voluntades  en los que se haya pactado  la modalidad  
+de pago por capitación,  la expedición  y entrega  de la primera  factura  electrónica  de 
+venta se hará sin el Registro  Individual  de Prestación  de Servicios  de Salud (RIPS).  
+Para la expedición  y entrega  desde  la segunda  y hasta  la última  factura  a las Entidades  
+Responsables  de Pago (ERP) y demás pagadores  será necesario  entregar  los 
+Registros  Individuales  de Prestación  de Servicios  de Salud  (RIPS)  del periodo  anterior,  
+aprobados  por el mecanismo  único  de validación  junto  con los demás  soportes.  Para el 
+periodo  final deberán  validarse  los Registros  Individuales  de Prestación  de Servicios  de 
+Salud (RIPS)  de dicho  periodo  a través  del mecanismo  único  de validación,  los cuales  
+se entregarán  con los demás  soportes.
+Parágrafo  3. Este Ministerio  creará  un módulo  para la recepción  en el mecanismo  
+único  de validación  de las facturas  generadas  por las compras  masivas  realizadas  por 
+las Entidades  Promotoras  de Salud (EPS)  a los fabricantes,  importadores  y titulares  de 
+registro  sanitario  de medicamentos,  dispositivos  e insumos.  En estos casos, se 
+utilizarán  facturas  electrónicas  de venta convencionales  con validación  previa de la 
+Unidad  Administrativa  Especial  Dirección  de Impuestos  y Aduanas  Nacionales  (DIAN),  
+las cuales  no estarán  soportadas  con un Registro  Individual  de Prestación  de Servicios  
+de Salud  (RIPS),  ni requerirán  de los campos  adicionales  del sector  salud.  El Ministerio  
+de Salud  y Protección  Social  definirá  la información  a diligenciar  en estas  facturas  que 
+será validada  en el módulo  de recepción  para permitir  su transmisión  y generar  el 
+respectivo  Código  único  de Validación.  También  se usará  este módulo  para la recepción  
+de las facturas  por actividades  de salud pública  y de intervenciones  colectivas.
+Parágrafo  4. Las Entidades  Responsables  de Pago (ERP) y los facturadores  
+electrónicos  deberán  contar  con procesos  automatizados  y en línea, que permitan  la 
+trazabilidad  cronológica  de la transferencia  de información  y el acuse de recibido  de 
+esta, en los términos  de la Ley 527 de 1999.
+RESOLUCIÓN  NÚMERO  000948  -'DEHOJA  N° 14
+a.
+b.
+1.
+2.
+3.Tipo A: Solución  tecnológica  tipo CLIENTE/SERVIDOR,  dirigida  a facturadores  
+electrónicos  del sector  salud  que no tienen  la posibilidad  de adelantar  desarrollos  
+propios  para interoperar  con la plataforma  del Ministerio  y que para su utilización  
+solo requiere  de la transmisión  del conjunto  de archivos  de información.
+Tipo B: Solución  tecnológica  tipo API RESTFUL  empaquetada  en contenedores  
+dirigida a facturadores  electrónicos  que tienen la posibilidad  de adelantar  
+desarrollos  propios para interoperar  con la plataforma  del Ministerio,  que 
+permiten  la transmisión  del conjunto  de archivos  de información.
+Recepción  de los archivos  de la Factura  Electrónica  de Venta  (FEV)  en salud,  o sus 
+documentos  electrónicos  asociados,  con validación  previa de la Unidad  
+Administrativa  Especial  Dirección  de Impuestos  y Aduanas  Nacionales  (DIAN)  y del 
+archivo  Registro  Individual  de Prestación  de Servicios  de Salud (RIPS) que la 
+soporta  o el archivo  Registro  Individual  de Prestación  de Servicios  de Salud  (RIPS)  
+de las notas  de ajuste,  según  corresponda.
+Validación  del archivo  del Registro  Individual  de Prestación  de Servicios  de Salud  
+(RIPS),  conforme  con lo establecido  en la presente  resolución  o las normas  que la 
+modifiquen  o sustituyan  emitidas  por el Comité  Técnico  de Direccionamiento  de 
+RIPS y los lineamientos  técnicos  del Registro  Individual  de Prestación  de Servicios  
+de Salud (RIPS) disponibles  en el enlace: https://www.sispro.qov.co/central-  
+financiamiento/Paqes/facturacion-electronica.aspx .
+Verificación  de la relación  de la Factura  Electrónica  de Venta  (FEV)  en salud,  o de 
+sus documentos  electrónicos  asociados,  con el Registro  Individual  de Prestación  
+de Servicios  de Salud (RIPS) soporte  de la misma,  según las especificaciones  
+técnicas  definidas  en la presente  resolución,  y los documentos  técnicos  1 y 2 
+disponibles en el enlace:  https://www.sispro.qov.co/central-
+financiamiento/Paqes/facturacion-electronica.aspx .
+4. Validación  de las Notas  de ajuste  del Registro  Individual  de Prestación  de Servicios  
+de Salud (RIPS),  cuando  aplique.
+5. Validación  del Registro  Individual  de Prestación  de Servicios  de Salud (RIPS)  sin 
+Factura  Electrónica  de Venta  (FEV)  en salud,  cuando  aplique.
+6. Generación  del Código Único de Validación  (CUV) al Registro  Individual  de 
+Prestación  de Servicios  de Salud  (RIPS)  como  soporte  de la Factura  Electrónica  de 
+Venta  (FEV)  en salud o de sus documentos  electrónicos.
+7. Validación  de facturas  convencionales  sin Registros  Individuales  de Prestación  de 
+Servicios  de Salud (RIPS)  en el caso de compras  directas  y masivas  a fabricantes,jfimv 20^
+c0(n^oo 1n dG 'a res°luc,ió"": “Porla cual se reglamenta  el Registro  Individual  de Prestación  de Servicios  de 
+<fev > “
+Este Ministerio  dispondrá  de dos alternativas  del sistema  de información  de validación  
+de los Registros  Individuales  de Prestación  de Servicios  de Salud (RIPS),  cuyo uso 
+dependerá  de las características  operativas  y tecnológicas  del facturador  electrónico  
+del sector  salud,  quien deberá  implementar  bajo su propia  infraestructura,  aquella  que 
+considere  que mejor  se ajuste  a sus necesidades  y capacidades.  Dichas  alternativas  
+son:
+Las características  y requisitos  tecnológicos  de estas alternativas  se detallan  en el 
+micrositio  de Factura  Electrónica  de Venta (FEV) en salud, alojado  en la página  
+institucional de este Ministerio, disponibles en el enlace:  
+https://www.sispro.qov.co/central-financiamiento/Paqes/facturacion-electronica.aspx .
+El procesamiento  de información  del mecanismo  único de validación  del Registro  
+Individual  de Prestación  de Servicios  de Salud (RIPS), comprende  las siguientes  
+actividades:
+RESOLUCIÓN  NÚMERO  ,000948HOJA  N° 15
+importadores  o titulares  de registro  sanitario  para ser entregados  a los gestores  
+farmacéuticos  para su posterior  dispensación  ambulatoria  a sus afiliados.
+8. Disposición  al facturador  electrónico  del sector  salud  del resultado  de las validaciones  
+definidas  en la presente  resolución  o la norma  que la modifique  o sustituya  y del 
+Código Único de Validación  (CUV) cuando  aplique, haciendo  uso del método  
+establecido  en el mecanismo  único  de validación.
+La información  del Registro  Individual  de Prestación  de Servicios  de Salud  (RIPS)  como  
+soporte  de la Factura  Electrónico  de Venta (FEV) en salud, será dispuesta  a losParágrafo.  Este Ministerio  como propietario  del sistema  de información  de validación  
+del Registro  Individual  de Prestación  de Servicios  de Salud (RIPS),  será el encargado  
+de su disponibilidad,  seguridad  y actualización.  Las actualizaciones  necesarias  para 
+garantizar  la calidad,  la seguridad  y rendimiento  del sistema  se realizarán  informando  
+previamente  de las mismas  a las entidades  obligadas  a acatar  las disposiciones  aquí 
+contenidas,  proporcionando  las garantías  para que la operación  no se vea afectada  y 
+la validación  del Registro  Individual  de Prestación  de Servicios  de Salud (RIPS)  se 
+realice,  según  las versiones  respectivas.
+Artículo  18. Proceso  de registro  o actualización  de entidades.  El Ministerio  de Salud  
+y Protección  Social  por medio  del Sistema  Integrado  de Información  de la Protección  
+Social (SISPRO)  permitirá  el registro  o actualización  de datos de los facturadores  
+electrónicos  del sector  salud (IPS) y de las entidades  obligadas  a reportar  el Registro  
+Individual  de Prestación  de Servicios  de Salud (RIPS)  sin factura,  como prerrequisito  
+para el uso del mecanismo  único  de validación  de Registro  Individual  de Prestación  de 
+Servicios  de Salud (RIPS). Estas entidades  deberán realizar la inscripción  o 
+actualización  en el siguiente  enlace:  https://web.sispro.qov.co , obteniendo  su usuario  y 
+contraseña.  Estos datos permitirán  la autenticación  al sistema  de información  de 
+validación  del Registro  Individual  de Prestación  de Servicios  de Salud (RIPS).
+Los profesionales  independientes  deberán  seguir  los lineamientos  establecidos  en la 
+guía de autenticación  del mecanismo  único  de validación,  que se encuentra  disponible  
+en 'a página del micrositio  https.7/ www. sispro.gov. co/central-
+financiamiento/Paqes/facturacion-electronica.aspx
+Los detalles  del proceso  de registro  o actualización  de entidades  en el Sistema  
+Integrado  de Información  de la Protección  Social (SISPRO)  se dispondrán  en el 
+micrositio  de factura  electrónica  de venta  en salud de la página  web de este Ministerio,  
+disponible en el enlace:  https://www.sispro.qov.co/central-
+financíamiento/Pages/facturacion-electronica.aspx .
+Artículo  19. Proceso  de disposición  de datos.  El mecanismo  único  de validación  del 
+Registro  Individual  de Prestación  de Servicios  de Salud (RIPS)  proveerá  al Sistema  
+Integral  de Información  Financiera  y Asistencial  (SIIFA),  información  de los archivos  de 
+la Factura  Electrónica  de Venta (FEV) en salud y la de sus documentos  electrónicos  
+asociados,  con la validación  previa  de la Unidad  Administrativa  Especial  Dirección  de 
+Impuestos  y Aduanas  Nacionales  (DIAN), el archivo del Registro  Individual  de 
+Prestación  de Servicios  de Salud (RIPS)  validado,  soporte  de cada uno de ellos, o el 
+archivo  de notas  de ajuste  de Registro  Individual  de Prestación  de Servicios  de Salud  
+(RIPS),  cuando  aplique,  junto con el código  único de validación  (CUV)  y las facturas  
+electrónicas  de venta convencionales  que se registren  en el Mecanismo  Único de 
+Validación.DE 14 MAY 2026
+Continuación  de la.resolución:  “Por la cual se reglamenta  el Registro  Individual  de Prestación  de Servicios  de 
+Salud  (RIPS)  como  soporte  de la Factura  Electrónica  de Venta (FEV) en salud, se derogan  las Resoluciones  2275 
+de 2023, 558 y 1884 de 2024  y, se dictan  otras disposiciones ”
+RESOLUCIÓN  NÚMEROHOJA  N°16 000948  DE 14 MAY 2026
+cP°rtla C^,al Se re9lamenta  el Registro  Individual  de Prestación  de Servicios  de 
+de 2023 558 7 1884 0^^ E ectrónica  de Venta (FEV)  en salud, se derogan  las Resoluciones  2275 
+ae ooa y i&84 ae 2024  y, se dictan  otras disposiciones
+Artículo  20. Del proceso  de soporte.  Este Ministerio  dispondrá  una mesa de ayuda  
+para brindar  el acompañamiento  técnico  al proceso  de generación  y reporte  del Registro  
+Individual  de Prestación  de Servicios  de Salud (RIPS) como soporte  de la Factura  
+Electrónica  de Venta  (FEV) en salud. Los datos de contacto,  así como la información  
+relacionada  con la normatividad  vigente  y sus anexos,  documentos  técnicos,  preguntas  
+frecuentes,  y ejemplificaciones  del Registro  Individual  de Prestación  de Servicios  de 
+Salud (RIPS) como soporte de la factura electrónica  de venta, se encuentran  
+disponibles en el siguiente enlace: https://www.sispro.qov.co/central-  
+financiamiento/Paqes/facturacion-electronica.aspx .Parágrafo  3. El Ministerio  de Salud y Protección  Social  publicará  un informe  periódico  
+sobre el comportamiento  de los participantes  del sistema  en el reporte  del Registro  
+Individual  de Prestación  de Servicios  de Salud (RIPS) como soporte  de la Factura  
+Electrónica  de Venta  (FEV)  en salud y definirá  el mecanismo  que permita  el acceso  a 
+esta información.Parágrafo  2. Los facturadores  electrónicos  del sector  salud y las entidades  obligadas  
+a reportar  los Registros  Individuales  de Prestación  de Servicios  de Salud (RIPS),  son 
+responsables  de la veracidad  y consistencia  de los datos  registrados  y del cumplimiento  
+de las reglas  de validación  de estos,  según  lo dispuesto  en la presente  resolución  o las 
+normas  que modifiquen  o sustituyan.  Las reglas  de validación  aplicables  al Registro  
+Individual  de Prestación  de Servicios  de Salud (RIPS) como soporte  de la Factura  
+Electrónico  de Venta (FEV) en salud, serán actualizadas  e incorporadas  
+progresivamente  al mecanismo  único de validación  para mejorar  la calidad de la 
+información.Parágrafo  1. A partir de los datos recibidos,  este Ministerio  definirá  el conjunto  de 
+informes  que den cuenta  de la calidad  y estandarización  de los datos a las entidades  
+destinatarias  del presente  acto administrativo,  con el fin de retroalimentarlas  frente  al 
+mejoramiento  en la generación  de los datos.
+Parágrafo  4. Las entidades  territoriales  no podrán  exigir a las Entidades  Promotoras  
+de Salud (EPS) ni a los prestadores  la remisión  de los Registros  Individuales  de 
+Prestación  de Servicios  de Salud (RIPS),  dado que el Ministerio  de Salud  y Protección  
+Social  dispondrá  los Registros  Individuales  de Prestación  de Servicios  de Salud  (RIPS)  
+correspondientes  a las atenciones  a usuarios  residentes  en su territorio.El Ministerio  de Salud y Protección  Social dispondrá  mensualmente  a las entidades  
+territoriales  del orden departamental  y distrital,  un archivo  anonimizado  con los datos  
+de los Registros  Individuales  de Prestación  de Servicios  de Salud (RIPS)  de su área de 
+influencia,  en el sitio FTPS habilitado  para éstas.sistemas  de información  del sector  salud gestionados  por este Ministerio  que así lo 
+requieran  y a los demás  actores  del sistema  de salud.
+Capítulo  5 
+Implementación  y disposiciones  finales
+Artículo  21. Seguridad  de la información  y protección  de datos  personales.  De 
+conformidad  con lo dispuesto  por las Leyes  527 de 1999, 594 de 2000, 1581 de 2012,  
+2015 de 2020 y el Decreto  1377 de 2013,  y las normas  que las modifiquen  o sustituyan,  
+el Ministerio  de Salud  y Protección  Social  como responsable  del mecanismo  único de
+HOJA  N° 17
+PUBLÍQUESE  Y CÚMPLASE
+Dada en Bogotá,  D.C., a los
+14 MAY 2026
+GUILLERMO  ALFONSO  JARAMILLO  MARTINEZ  
+Ministro  de Salud  y Protección  Social
+Aprobó:  / )
+Viceministro  de Protección  Social  - Luis Alberto  Martínez  Saldarriaga  /
+Jefe de la Ofrcma  de Tecnologías  de la Información  y Comunicaciones  - Didier  Aníbal  Beltrln  Cadena
+vo.Bo.  (>-
+Director  Jurídico  (E)- Rodolfo  Enrique  Salas Figueroa Z*""””'
+<5validación  del Registro  Individual  de Prestación  de Servicios  de Salud (RIPS)  como  
+soporte  de la Factura  Electrónica  de Venta  (FEV)  en Salud,  asi como las entidades  de 
+que trata el artículo  2 de la presente  resolución,  garantizarán  al interior  de sus procesos  
+y tecnologías  informáticas  y con los terceros involucrados,  la veracidad  
+conftdenc'ahdad,  integridad,  custodia  y disponibilidad  de los datos del Registró  
+ndiyidual  de Prestación  de Servicios  de Salud (RIPS)  y, deberán  utilizar  y garantizar  
+las técnicas  necesarias  para evitar  el riesgo  a la suplantación,  alteración,  extracción  
+secuestro  y cualquier  acceso  o uso indebido  o fraudulento  o no autorizado  de los datos ’ 
+de acuerdo  con lo establecido  en la normativa  vigente  expedida  por el Archivo  General  
+de la Nación, la Superintendencia  de Industria  y Comercio  y, el Ministerio  de 
+Tecnologías  de Información  y Comunicaciones.
+Artículo  22. Seguimiento  y control.  La Superintendencia  Nacional  de Salud  efectuará  
+la inspección,  vigilancia  y control  del cumplimiento  de las disposiciones  previstas  en la 
+Pásente  resolución,  sin perjuicio  de las funciones  de inspección,  vigilancia  y control  
+atribuidas  a las demás autoridades  competentes,  de conformidad  con las normas  
+legales  vigentes.
+Parágrafo  transitorio.  La aplicación  de la presente  resolución  se realizará  de manera  
+gradual,  de tal forma  que, a partir  del primero  (1) de junio de 2026  entrarán  en vigor las 
+reglas  de validación  que se pasan  de notificación  a rechazo  y a partir  del primero  (1) de 
+julio de 2026 serán  exigióles  los ajustes  de versión  de software  de carácter  estructural.14 MAY 2026
+ae ¿023, 558 y 1884 de 2024  y, se dictan  otras  disposiciones""
+Alfid  k»)Art'GulQ  23. Vigencia  y derogatorias.  El presente  acto administrativo  rige a partir  de 
+2024 3 SU expedición  y dero9a las Resoluciones  2275 de 2023, 558 y 1884 deRESOLUCIÓN  NÚMERO  00()94g  DE
+",Juridico,91.54
+2026-05-21 09:22:03.931987,"Actividad 2: Implementación de modelos con herramientas y frameworks clave: 
+Scikit -learn, TensorFlow, Keras y PyTorch  
+ 
+Desarrollo de modelos de aprendizaje automático  
+ 
+ 
+Predicción de abandono de clientes (Churn)  
+ 
+Estudiante: Luis Alberto Lozano Alvarez  
+Docente: Karla Sánchez.  
+ 
+Corporación Universitaria Iberoamericana  
+Especialización en inteligencia artificial  
+Mayo – 2026  
+Tunja.  
+ En el enrono empresarial actual , el poder de  anticipar el 
+comportamiento de los clientes es fundamental  para la toma de decisiones 
+estratégicas, uno de los principales retos  es identificar que clientes  son los que 
+tienen mayor probabilidad  de abandonar el servicio, fenómeno conocido como 
+churn.  
+Este proyecto tiene como meta  implementar un modelo de 
+inteligencia artificial , el cual se basa en redes neuronales las cuales permiten 
+predecir el abandono de clientes a partir de variables de comportamiento, para 
+ello, se emplean técnicas de aprendizaj e supervisado, utilizando herramientas 
+como Scikit -learn para el procesamiento de datos  y TensorFlow/Keras para la 
+construcción del modelo.  
+Contexto del problema:  
+La empresas que operan bajo modelos de suscripción  
+enfrentan pérdidas económicas cuando cancelan sus servicios. En muchos 
+casos, estas cancelaciones no son anticipadas a la falta de herramientas 
+analíticas.  
+Este trabajo simula un escenario empresarial  donde se busca 
+predecir el churn a partir de variables como:  
+• Edad  
+• Tiempo del cliente  
+• Nivel de uso del servicio  
+• Historial de pagos  El objetivo es desarrollar un modelo que permita identificar 
+patrones de comportamiento y apoyar la toma de decisiones orientadas a la 
+retención de clientes.  
+Modelo de aprendizaje:  
+Link:  
+https://colab.research.google.com/drive/1osaTTSdcCVr0B9I3I2ne8YAkp9z
+SzlpK?usp=sharing  
+Descripcion general del modelo:  
+• Tipo de problema: Clasificación  binaria  
+• Tipo de aprendizaje : Supervisado  
+• Variable objetivo: ( 0 = no abandona, 1 = abandona)  
+• Frameworks utilizados: Scikit - Learn, TensorFlow, Keras.  
+Explicacion del modulo.  
+Importacion de librerias:  
+• Manipulación de datos, ( pandas, NumPy).  
+• División de datos y procesamiento, ( Scikit - Learn).  
+• Construcción del modelo, ( Tensor Flow/ Keras).  
+El propósito de esto es  establecer el entorno de trabajo para el análisis y 
+modelado.  Creación de carpetas de resultados.  
+ Se crea una carpeta donde se almacena :  
+• Dataset  
+• Resultados  
+• Predicciones  
+• Modelo entrenado.  
+Esto nos garantiza trazabilidad y organización de la 
+información para el proyecto.  
+Creación del dataset simulado.  
+Se genera  un conjunto de datos artificiales con 200 
+registros, incluyendo variables relevantes para el comportamiento del cliente.  
+La variable churn se construye mediante reglas lógicas:  
+• Bajo uso + pagos atrasados.  
+• Poco tiempo como cliente.  
+Propósito :  
+• Simular un e senario realista.  
+• Permitir el entrenamiento de este modelo.  
+Separación de variables.  
+ 
+X: Variables independientes.  
+Y: Variable objetivo   
+Esto permite entrenar el modelo con entradas y salidas definidas.  
+Procesamiento de datos.  
+En el procesamiento de datos se utilizo  
+• ColumnTransformer  
+• OneHotEncoder  
+ Esto permite mantener variables numéricas, convertir 
+variables categóricas en formato numérico ya que los modelos de IA no pueden 
+procesar texto directamente.  
+División de datos  
+ 
+• 80% entrenamiento  
+• 20% prueba  
+ Esto permite evaluar el modelo en datos que no había visto antes.  
+Construcción del modelo.  
+Se define una red neuronal con:  
+• 2 capas ocultas.  
+• Función de activación ReLu.  
+• Capa de salida Sigmoide  
+Debemos tener en cuenta que ReLu permite la captura de 
+relaciones no lineales y sigmoide permite la salida binaria a nuestro modelo  
+Compilación del modelo.  
+ 
+• Optimizador Adams  
+• Función de perdida: Binary Crossentropy  
+Esto nos permite configurar la manera de cómo va a aprender el modelo.  
+Entrenamiento del modelo.  
+ 
+El modelo aprende patrones a partir de datos de entrenamiento incluyendo 
+la validación con daos de prueba.  
+ 
+Evaluación.  
+Se calculan:  
+• Accuracy  
+• Reporte de clasificación  
+• Matriz de confusión  
+ Esto nos permite medir el desempeño del modelo.  
+ 
+ 
+ 
+ 
+ 
+ Guardado de los resultados.  
+Se almacenan:  
+• Métricas en archivo. Txt  
+• Predicciones en . csv  
+• Modelo en .h5  
+Resultados y análisis.  
+El modelo  logro identificar patrones en datos simulados, 
+alcanzando un nivel adecuado de precisión, la matriz de confusión permitió 
+analizar verdaderos positivos, falsos positivos, falsos negativos, lo cual fue 
+clave para evaluar el impacto del modelo en la toma de decisiones.  
+En el análisis crítico  el dataset es simulado, por lo cual 
+los resultados pueden no reflejar un entorno real, también existe riesgo de 
+sobreajuste, ( overfitting),  el modelo pude mejorar  con más variables y 
+datos reales.  
+Conclusiones.  
+• La inteligencia artificial nos permite predecir el abandono de los 
+clientes de manera efectiva.  
+• Las redes neuronales  son capaces de capturar patrones complejos  
+• El procesamiento  de datos es una etapa critica  
+• La evaluación del modelo es fundamental para validar su utilidad.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Referencias.  
+ 
+Bonilla, V. (2018). Machine Learning con TensorFlow (cap. 5). Universidad 
+Politécnica de Madrid.   
+ 
+Geron , A. (2023). Aprendizaje automático con Scikit -Learn, Keras y 
+TensorFlow (cap. 3.)  
+Sarzosa -Soto, R. (2024). Herramientas de inteligencia artificial: investigación, 
+arquitectura y aplicaciones (Cap. 3).  
+ 
+ ",Talento_Humano,83.42
+2026-05-21 09:22:05.600103,"Actividad 2: Implementación de modelos con herramientas y frameworks clave: 
+Scikit -learn, TensorFlow, Keras y PyTorch  
+ 
+Desarrollo de modelos de aprendizaje automático  
+ 
+ 
+Predicción de abandono de clientes (Churn)  
+ 
+Estudiante: Luis Alberto Lozano Alvarez  
+Docente: Karla Sánchez.  
+ 
+Corporación Universitaria Iberoamericana  
+Especialización en inteligencia artificial  
+Mayo – 2026  
+Tunja.  
+ En el enrono empresarial actual , el poder de  anticipar el 
+comportamiento de los clientes es fundamental  para la toma de decisiones 
+estratégicas, uno de los principales retos  es identificar que clientes  son los que 
+tienen mayor probabilidad  de abandonar el servicio, fenómeno conocido como 
+churn.  
+Este proyecto tiene como meta  implementar un modelo de 
+inteligencia artificial , el cual se basa en redes neuronales las cuales permiten 
+predecir el abandono de clientes a partir de variables de comportamiento, para 
+ello, se emplean técnicas de aprendizaj e supervisado, utilizando herramientas 
+como Scikit -learn para el procesamiento de datos  y TensorFlow/Keras para la 
+construcción del modelo.  
+Contexto del problema:  
+La empresas que operan bajo modelos de suscripción  
+enfrentan pérdidas económicas cuando cancelan sus servicios. En muchos 
+casos, estas cancelaciones no son anticipadas a la falta de herramientas 
+analíticas.  
+Este trabajo simula un escenario empresarial  donde se busca 
+predecir el churn a partir de variables como:  
+• Edad  
+• Tiempo del cliente  
+• Nivel de uso del servicio  
+• Historial de pagos  El objetivo es desarrollar un modelo que permita identificar 
+patrones de comportamiento y apoyar la toma de decisiones orientadas a la 
+retención de clientes.  
+Modelo de aprendizaje:  
+Link:  
+https://colab.research.google.com/drive/1osaTTSdcCVr0B9I3I2ne8YAkp9z
+SzlpK?usp=sharing  
+Descripcion general del modelo:  
+• Tipo de problema: Clasificación  binaria  
+• Tipo de aprendizaje : Supervisado  
+• Variable objetivo: ( 0 = no abandona, 1 = abandona)  
+• Frameworks utilizados: Scikit - Learn, TensorFlow, Keras.  
+Explicacion del modulo.  
+Importacion de librerias:  
+• Manipulación de datos, ( pandas, NumPy).  
+• División de datos y procesamiento, ( Scikit - Learn).  
+• Construcción del modelo, ( Tensor Flow/ Keras).  
+El propósito de esto es  establecer el entorno de trabajo para el análisis y 
+modelado.  Creación de carpetas de resultados.  
+ Se crea una carpeta donde se almacena :  
+• Dataset  
+• Resultados  
+• Predicciones  
+• Modelo entrenado.  
+Esto nos garantiza trazabilidad y organización de la 
+información para el proyecto.  
+Creación del dataset simulado.  
+Se genera  un conjunto de datos artificiales con 200 
+registros, incluyendo variables relevantes para el comportamiento del cliente.  
+La variable churn se construye mediante reglas lógicas:  
+• Bajo uso + pagos atrasados.  
+• Poco tiempo como cliente.  
+Propósito :  
+• Simular un e senario realista.  
+• Permitir el entrenamiento de este modelo.  
+Separación de variables.  
+ 
+X: Variables independientes.  
+Y: Variable objetivo   
+Esto permite entrenar el modelo con entradas y salidas definidas.  
+Procesamiento de datos.  
+En el procesamiento de datos se utilizo  
+• ColumnTransformer  
+• OneHotEncoder  
+ Esto permite mantener variables numéricas, convertir 
+variables categóricas en formato numérico ya que los modelos de IA no pueden 
+procesar texto directamente.  
+División de datos  
+ 
+• 80% entrenamiento  
+• 20% prueba  
+ Esto permite evaluar el modelo en datos que no había visto antes.  
+Construcción del modelo.  
+Se define una red neuronal con:  
+• 2 capas ocultas.  
+• Función de activación ReLu.  
+• Capa de salida Sigmoide  
+Debemos tener en cuenta que ReLu permite la captura de 
+relaciones no lineales y sigmoide permite la salida binaria a nuestro modelo  
+Compilación del modelo.  
+ 
+• Optimizador Adams  
+• Función de perdida: Binary Crossentropy  
+Esto nos permite configurar la manera de cómo va a aprender el modelo.  
+Entrenamiento del modelo.  
+ 
+El modelo aprende patrones a partir de datos de entrenamiento incluyendo 
+la validación con daos de prueba.  
+ 
+Evaluación.  
+Se calculan:  
+• Accuracy  
+• Reporte de clasificación  
+• Matriz de confusión  
+ Esto nos permite medir el desempeño del modelo.  
+ 
+ 
+ 
+ 
+ 
+ Guardado de los resultados.  
+Se almacenan:  
+• Métricas en archivo. Txt  
+• Predicciones en . csv  
+• Modelo en .h5  
+Resultados y análisis.  
+El modelo  logro identificar patrones en datos simulados, 
+alcanzando un nivel adecuado de precisión, la matriz de confusión permitió 
+analizar verdaderos positivos, falsos positivos, falsos negativos, lo cual fue 
+clave para evaluar el impacto del modelo en la toma de decisiones.  
+En el análisis crítico  el dataset es simulado, por lo cual 
+los resultados pueden no reflejar un entorno real, también existe riesgo de 
+sobreajuste, ( overfitting),  el modelo pude mejorar  con más variables y 
+datos reales.  
+Conclusiones.  
+• La inteligencia artificial nos permite predecir el abandono de los 
+clientes de manera efectiva.  
+• Las redes neuronales  son capaces de capturar patrones complejos  
+• El procesamiento  de datos es una etapa critica  
+• La evaluación del modelo es fundamental para validar su utilidad.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Referencias.  
+ 
+Bonilla, V. (2018). Machine Learning con TensorFlow (cap. 5). Universidad 
+Politécnica de Madrid.   
+ 
+Geron , A. (2023). Aprendizaje automático con Scikit -Learn, Keras y 
+TensorFlow (cap. 3.)  
+Sarzosa -Soto, R. (2024). Herramientas de inteligencia artificial: investigación, 
+arquitectura y aplicaciones (Cap. 3).  
+ 
+ ",Talento_Humano,83.42
+2026-05-21 09:22:09.532910,"Actividad 2: Implementación de modelos con herramientas y frameworks clave: 
+Scikit -learn, TensorFlow, Keras y PyTorch  
+ 
+Desarrollo de modelos de aprendizaje automático  
+ 
+ 
+Predicción de abandono de clientes (Churn)  
+ 
+Estudiante: Luis Alberto Lozano Alvarez  
+Docente: Karla Sánchez.  
+ 
+Corporación Universitaria Iberoamericana  
+Especialización en inteligencia artificial  
+Mayo – 2026  
+Tunja.  
+ En el enrono empresarial actual , el poder de  anticipar el 
+comportamiento de los clientes es fundamental  para la toma de decisiones 
+estratégicas, uno de los principales retos  es identificar que clientes  son los que 
+tienen mayor probabilidad  de abandonar el servicio, fenómeno conocido como 
+churn.  
+Este proyecto tiene como meta  implementar un modelo de 
+inteligencia artificial , el cual se basa en redes neuronales las cuales permiten 
+predecir el abandono de clientes a partir de variables de comportamiento, para 
+ello, se emplean técnicas de aprendizaj e supervisado, utilizando herramientas 
+como Scikit -learn para el procesamiento de datos  y TensorFlow/Keras para la 
+construcción del modelo.  
+Contexto del problema:  
+La empresas que operan bajo modelos de suscripción  
+enfrentan pérdidas económicas cuando cancelan sus servicios. En muchos 
+casos, estas cancelaciones no son anticipadas a la falta de herramientas 
+analíticas.  
+Este trabajo simula un escenario empresarial  donde se busca 
+predecir el churn a partir de variables como:  
+• Edad  
+• Tiempo del cliente  
+• Nivel de uso del servicio  
+• Historial de pagos  El objetivo es desarrollar un modelo que permita identificar 
+patrones de comportamiento y apoyar la toma de decisiones orientadas a la 
+retención de clientes.  
+Modelo de aprendizaje:  
+Link:  
+https://colab.research.google.com/drive/1osaTTSdcCVr0B9I3I2ne8YAkp9z
+SzlpK?usp=sharing  
+Descripcion general del modelo:  
+• Tipo de problema: Clasificación  binaria  
+• Tipo de aprendizaje : Supervisado  
+• Variable objetivo: ( 0 = no abandona, 1 = abandona)  
+• Frameworks utilizados: Scikit - Learn, TensorFlow, Keras.  
+Explicacion del modulo.  
+Importacion de librerias:  
+• Manipulación de datos, ( pandas, NumPy).  
+• División de datos y procesamiento, ( Scikit - Learn).  
+• Construcción del modelo, ( Tensor Flow/ Keras).  
+El propósito de esto es  establecer el entorno de trabajo para el análisis y 
+modelado.  Creación de carpetas de resultados.  
+ Se crea una carpeta donde se almacena :  
+• Dataset  
+• Resultados  
+• Predicciones  
+• Modelo entrenado.  
+Esto nos garantiza trazabilidad y organización de la 
+información para el proyecto.  
+Creación del dataset simulado.  
+Se genera  un conjunto de datos artificiales con 200 
+registros, incluyendo variables relevantes para el comportamiento del cliente.  
+La variable churn se construye mediante reglas lógicas:  
+• Bajo uso + pagos atrasados.  
+• Poco tiempo como cliente.  
+Propósito :  
+• Simular un e senario realista.  
+• Permitir el entrenamiento de este modelo.  
+Separación de variables.  
+ 
+X: Variables independientes.  
+Y: Variable objetivo   
+Esto permite entrenar el modelo con entradas y salidas definidas.  
+Procesamiento de datos.  
+En el procesamiento de datos se utilizo  
+• ColumnTransformer  
+• OneHotEncoder  
+ Esto permite mantener variables numéricas, convertir 
+variables categóricas en formato numérico ya que los modelos de IA no pueden 
+procesar texto directamente.  
+División de datos  
+ 
+• 80% entrenamiento  
+• 20% prueba  
+ Esto permite evaluar el modelo en datos que no había visto antes.  
+Construcción del modelo.  
+Se define una red neuronal con:  
+• 2 capas ocultas.  
+• Función de activación ReLu.  
+• Capa de salida Sigmoide  
+Debemos tener en cuenta que ReLu permite la captura de 
+relaciones no lineales y sigmoide permite la salida binaria a nuestro modelo  
+Compilación del modelo.  
+ 
+• Optimizador Adams  
+• Función de perdida: Binary Crossentropy  
+Esto nos permite configurar la manera de cómo va a aprender el modelo.  
+Entrenamiento del modelo.  
+ 
+El modelo aprende patrones a partir de datos de entrenamiento incluyendo 
+la validación con daos de prueba.  
+ 
+Evaluación.  
+Se calculan:  
+• Accuracy  
+• Reporte de clasificación  
+• Matriz de confusión  
+ Esto nos permite medir el desempeño del modelo.  
+ 
+ 
+ 
+ 
+ 
+ Guardado de los resultados.  
+Se almacenan:  
+• Métricas en archivo. Txt  
+• Predicciones en . csv  
+• Modelo en .h5  
+Resultados y análisis.  
+El modelo  logro identificar patrones en datos simulados, 
+alcanzando un nivel adecuado de precisión, la matriz de confusión permitió 
+analizar verdaderos positivos, falsos positivos, falsos negativos, lo cual fue 
+clave para evaluar el impacto del modelo en la toma de decisiones.  
+En el análisis crítico  el dataset es simulado, por lo cual 
+los resultados pueden no reflejar un entorno real, también existe riesgo de 
+sobreajuste, ( overfitting),  el modelo pude mejorar  con más variables y 
+datos reales.  
+Conclusiones.  
+• La inteligencia artificial nos permite predecir el abandono de los 
+clientes de manera efectiva.  
+• Las redes neuronales  son capaces de capturar patrones complejos  
+• El procesamiento  de datos es una etapa critica  
+• La evaluación del modelo es fundamental para validar su utilidad.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Referencias.  
+ 
+Bonilla, V. (2018). Machine Learning con TensorFlow (cap. 5). Universidad 
+Politécnica de Madrid.   
+ 
+Geron , A. (2023). Aprendizaje automático con Scikit -Learn, Keras y 
+TensorFlow (cap. 3.)  
+Sarzosa -Soto, R. (2024). Herramientas de inteligencia artificial: investigación, 
+arquitectura y aplicaciones (Cap. 3).  
+ 
+ ",Talento_Humano,83.42
+2026-05-21 09:22:10.180488,"Actividad 2: Implementación de modelos con herramientas y frameworks clave: 
+Scikit -learn, TensorFlow, Keras y PyTorch  
+ 
+Desarrollo de modelos de aprendizaje automático  
+ 
+ 
+Predicción de abandono de clientes (Churn)  
+ 
+Estudiante: Luis Alberto Lozano Alvarez  
+Docente: Karla Sánchez.  
+ 
+Corporación Universitaria Iberoamericana  
+Especialización en inteligencia artificial  
+Mayo – 2026  
+Tunja.  
+ En el enrono empresarial actual , el poder de  anticipar el 
+comportamiento de los clientes es fundamental  para la toma de decisiones 
+estratégicas, uno de los principales retos  es identificar que clientes  son los que 
+tienen mayor probabilidad  de abandonar el servicio, fenómeno conocido como 
+churn.  
+Este proyecto tiene como meta  implementar un modelo de 
+inteligencia artificial , el cual se basa en redes neuronales las cuales permiten 
+predecir el abandono de clientes a partir de variables de comportamiento, para 
+ello, se emplean técnicas de aprendizaj e supervisado, utilizando herramientas 
+como Scikit -learn para el procesamiento de datos  y TensorFlow/Keras para la 
+construcción del modelo.  
+Contexto del problema:  
+La empresas que operan bajo modelos de suscripción  
+enfrentan pérdidas económicas cuando cancelan sus servicios. En muchos 
+casos, estas cancelaciones no son anticipadas a la falta de herramientas 
+analíticas.  
+Este trabajo simula un escenario empresarial  donde se busca 
+predecir el churn a partir de variables como:  
+• Edad  
+• Tiempo del cliente  
+• Nivel de uso del servicio  
+• Historial de pagos  El objetivo es desarrollar un modelo que permita identificar 
+patrones de comportamiento y apoyar la toma de decisiones orientadas a la 
+retención de clientes.  
+Modelo de aprendizaje:  
+Link:  
+https://colab.research.google.com/drive/1osaTTSdcCVr0B9I3I2ne8YAkp9z
+SzlpK?usp=sharing  
+Descripcion general del modelo:  
+• Tipo de problema: Clasificación  binaria  
+• Tipo de aprendizaje : Supervisado  
+• Variable objetivo: ( 0 = no abandona, 1 = abandona)  
+• Frameworks utilizados: Scikit - Learn, TensorFlow, Keras.  
+Explicacion del modulo.  
+Importacion de librerias:  
+• Manipulación de datos, ( pandas, NumPy).  
+• División de datos y procesamiento, ( Scikit - Learn).  
+• Construcción del modelo, ( Tensor Flow/ Keras).  
+El propósito de esto es  establecer el entorno de trabajo para el análisis y 
+modelado.  Creación de carpetas de resultados.  
+ Se crea una carpeta donde se almacena :  
+• Dataset  
+• Resultados  
+• Predicciones  
+• Modelo entrenado.  
+Esto nos garantiza trazabilidad y organización de la 
+información para el proyecto.  
+Creación del dataset simulado.  
+Se genera  un conjunto de datos artificiales con 200 
+registros, incluyendo variables relevantes para el comportamiento del cliente.  
+La variable churn se construye mediante reglas lógicas:  
+• Bajo uso + pagos atrasados.  
+• Poco tiempo como cliente.  
+Propósito :  
+• Simular un e senario realista.  
+• Permitir el entrenamiento de este modelo.  
+Separación de variables.  
+ 
+X: Variables independientes.  
+Y: Variable objetivo   
+Esto permite entrenar el modelo con entradas y salidas definidas.  
+Procesamiento de datos.  
+En el procesamiento de datos se utilizo  
+• ColumnTransformer  
+• OneHotEncoder  
+ Esto permite mantener variables numéricas, convertir 
+variables categóricas en formato numérico ya que los modelos de IA no pueden 
+procesar texto directamente.  
+División de datos  
+ 
+• 80% entrenamiento  
+• 20% prueba  
+ Esto permite evaluar el modelo en datos que no había visto antes.  
+Construcción del modelo.  
+Se define una red neuronal con:  
+• 2 capas ocultas.  
+• Función de activación ReLu.  
+• Capa de salida Sigmoide  
+Debemos tener en cuenta que ReLu permite la captura de 
+relaciones no lineales y sigmoide permite la salida binaria a nuestro modelo  
+Compilación del modelo.  
+ 
+• Optimizador Adams  
+• Función de perdida: Binary Crossentropy  
+Esto nos permite configurar la manera de cómo va a aprender el modelo.  
+Entrenamiento del modelo.  
+ 
+El modelo aprende patrones a partir de datos de entrenamiento incluyendo 
+la validación con daos de prueba.  
+ 
+Evaluación.  
+Se calculan:  
+• Accuracy  
+• Reporte de clasificación  
+• Matriz de confusión  
+ Esto nos permite medir el desempeño del modelo.  
+ 
+ 
+ 
+ 
+ 
+ Guardado de los resultados.  
+Se almacenan:  
+• Métricas en archivo. Txt  
+• Predicciones en . csv  
+• Modelo en .h5  
+Resultados y análisis.  
+El modelo  logro identificar patrones en datos simulados, 
+alcanzando un nivel adecuado de precisión, la matriz de confusión permitió 
+analizar verdaderos positivos, falsos positivos, falsos negativos, lo cual fue 
+clave para evaluar el impacto del modelo en la toma de decisiones.  
+En el análisis crítico  el dataset es simulado, por lo cual 
+los resultados pueden no reflejar un entorno real, también existe riesgo de 
+sobreajuste, ( overfitting),  el modelo pude mejorar  con más variables y 
+datos reales.  
+Conclusiones.  
+• La inteligencia artificial nos permite predecir el abandono de los 
+clientes de manera efectiva.  
+• Las redes neuronales  son capaces de capturar patrones complejos  
+• El procesamiento  de datos es una etapa critica  
+• La evaluación del modelo es fundamental para validar su utilidad.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Referencias.  
+ 
+Bonilla, V. (2018). Machine Learning con TensorFlow (cap. 5). Universidad 
+Politécnica de Madrid.   
+ 
+Geron , A. (2023). Aprendizaje automático con Scikit -Learn, Keras y 
+TensorFlow (cap. 3.)  
+Sarzosa -Soto, R. (2024). Herramientas de inteligencia artificial: investigación, 
+arquitectura y aplicaciones (Cap. 3).  
+ 
+ ",Talento_Humano,83.42
+2026-05-21 09:25:40.509264,"Actividad 2: Implementación de modelos con herramientas y frameworks clave: 
+Scikit -learn, TensorFlow, Keras y PyTorch  
+ 
+Desarrollo de modelos de aprendizaje automático  
+ 
+ 
+Predicción de abandono de clientes (Churn)  
+ 
+Estudiante: Luis Alberto Lozano Alvarez  
+Docente: Karla Sánchez.  
+ 
+Corporación Universitaria Iberoamericana  
+Especialización en inteligencia artificial  
+Mayo – 2026  
+Tunja.  
+ En el enrono empresarial actual , el poder de  anticipar el 
+comportamiento de los clientes es fundamental  para la toma de decisiones 
+estratégicas, uno de los principales retos  es identificar que clientes  son los que 
+tienen mayor probabilidad  de abandonar el servicio, fenómeno conocido como 
+churn.  
+Este proyecto tiene como meta  implementar un modelo de 
+inteligencia artificial , el cual se basa en redes neuronales las cuales permiten 
+predecir el abandono de clientes a partir de variables de comportamiento, para 
+ello, se emplean técnicas de aprendizaj e supervisado, utilizando herramientas 
+como Scikit -learn para el procesamiento de datos  y TensorFlow/Keras para la 
+construcción del modelo.  
+Contexto del problema:  
+La empresas que operan bajo modelos de suscripción  
+enfrentan pérdidas económicas cuando cancelan sus servicios. En muchos 
+casos, estas cancelaciones no son anticipadas a la falta de herramientas 
+analíticas.  
+Este trabajo simula un escenario empresarial  donde se busca 
+predecir el churn a partir de variables como:  
+• Edad  
+• Tiempo del cliente  
+• Nivel de uso del servicio  
+• Historial de pagos  El objetivo es desarrollar un modelo que permita identificar 
+patrones de comportamiento y apoyar la toma de decisiones orientadas a la 
+retención de clientes.  
+Modelo de aprendizaje:  
+Link:  
+https://colab.research.google.com/drive/1osaTTSdcCVr0B9I3I2ne8YAkp9z
+SzlpK?usp=sharing  
+Descripcion general del modelo:  
+• Tipo de problema: Clasificación  binaria  
+• Tipo de aprendizaje : Supervisado  
+• Variable objetivo: ( 0 = no abandona, 1 = abandona)  
+• Frameworks utilizados: Scikit - Learn, TensorFlow, Keras.  
+Explicacion del modulo.  
+Importacion de librerias:  
+• Manipulación de datos, ( pandas, NumPy).  
+• División de datos y procesamiento, ( Scikit - Learn).  
+• Construcción del modelo, ( Tensor Flow/ Keras).  
+El propósito de esto es  establecer el entorno de trabajo para el análisis y 
+modelado.  Creación de carpetas de resultados.  
+ Se crea una carpeta donde se almacena :  
+• Dataset  
+• Resultados  
+• Predicciones  
+• Modelo entrenado.  
+Esto nos garantiza trazabilidad y organización de la 
+información para el proyecto.  
+Creación del dataset simulado.  
+Se genera  un conjunto de datos artificiales con 200 
+registros, incluyendo variables relevantes para el comportamiento del cliente.  
+La variable churn se construye mediante reglas lógicas:  
+• Bajo uso + pagos atrasados.  
+• Poco tiempo como cliente.  
+Propósito :  
+• Simular un e senario realista.  
+• Permitir el entrenamiento de este modelo.  
+Separación de variables.  
+ 
+X: Variables independientes.  
+Y: Variable objetivo   
+Esto permite entrenar el modelo con entradas y salidas definidas.  
+Procesamiento de datos.  
+En el procesamiento de datos se utilizo  
+• ColumnTransformer  
+• OneHotEncoder  
+ Esto permite mantener variables numéricas, convertir 
+variables categóricas en formato numérico ya que los modelos de IA no pueden 
+procesar texto directamente.  
+División de datos  
+ 
+• 80% entrenamiento  
+• 20% prueba  
+ Esto permite evaluar el modelo en datos que no había visto antes.  
+Construcción del modelo.  
+Se define una red neuronal con:  
+• 2 capas ocultas.  
+• Función de activación ReLu.  
+• Capa de salida Sigmoide  
+Debemos tener en cuenta que ReLu permite la captura de 
+relaciones no lineales y sigmoide permite la salida binaria a nuestro modelo  
+Compilación del modelo.  
+ 
+• Optimizador Adams  
+• Función de perdida: Binary Crossentropy  
+Esto nos permite configurar la manera de cómo va a aprender el modelo.  
+Entrenamiento del modelo.  
+ 
+El modelo aprende patrones a partir de datos de entrenamiento incluyendo 
+la validación con daos de prueba.  
+ 
+Evaluación.  
+Se calculan:  
+• Accuracy  
+• Reporte de clasificación  
+• Matriz de confusión  
+ Esto nos permite medir el desempeño del modelo.  
+ 
+ 
+ 
+ 
+ 
+ Guardado de los resultados.  
+Se almacenan:  
+• Métricas en archivo. Txt  
+• Predicciones en . csv  
+• Modelo en .h5  
+Resultados y análisis.  
+El modelo  logro identificar patrones en datos simulados, 
+alcanzando un nivel adecuado de precisión, la matriz de confusión permitió 
+analizar verdaderos positivos, falsos positivos, falsos negativos, lo cual fue 
+clave para evaluar el impacto del modelo en la toma de decisiones.  
+En el análisis crítico  el dataset es simulado, por lo cual 
+los resultados pueden no reflejar un entorno real, también existe riesgo de 
+sobreajuste, ( overfitting),  el modelo pude mejorar  con más variables y 
+datos reales.  
+Conclusiones.  
+• La inteligencia artificial nos permite predecir el abandono de los 
+clientes de manera efectiva.  
+• Las redes neuronales  son capaces de capturar patrones complejos  
+• El procesamiento  de datos es una etapa critica  
+• La evaluación del modelo es fundamental para validar su utilidad.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Referencias.  
+ 
+Bonilla, V. (2018). Machine Learning con TensorFlow (cap. 5). Universidad 
+Politécnica de Madrid.   
+ 
+Geron , A. (2023). Aprendizaje automático con Scikit -Learn, Keras y 
+TensorFlow (cap. 3.)  
+Sarzosa -Soto, R. (2024). Herramientas de inteligencia artificial: investigación, 
+arquitectura y aplicaciones (Cap. 3).  
+ 
+ ",Talento_Humano,83.42
+2026-05-21 09:26:05.251746,"// ================= CONFIG =================
+const CONFIG = {
+  HOJA_DB: 'OFICIOS_DB',
+  HOJA_CONTROL: 'CONTROL',
+  HOJA_FORM1: 'RESPUESTAS_FORM',
+  HOJA_FORM2: 'RESPUESTAS_FORM2',
+  HOJA_LOGS: 'LOGS',
+  FORM2_URL: 'https://forms.gle/MtRV5MBbJ6GBPGnb7',
+  EMAILS: ['vicerrectoria.academica@uptc.edu.co']
+};
+
+// ================= LOG =================
+function log(tipo, mensaje) {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  let hoja = ss.getSheetByName(CONFIG.HOJA_LOGS);
+
+  if (!hoja) {
+    hoja = ss.insertSheet(CONFIG.HOJA_LOGS);
+    hoja.appendRow([""Fecha"", ""Tipo"", ""Mensaje""]);
+  }
+
+  hoja.appendRow([new Date(), tipo, mensaje]);
+}
+
+// ================= FORMULARIO 1 =================
+function guardarForm1(e) {
+  try {
+    const ss = SpreadsheetApp.getActiveSpreadsheet();
+    const db = ss.getSheetByName(CONFIG.HOJA_DB);
+    const control = ss.getSheetByName(CONFIG.HOJA_CONTROL);
+
+    const datos = e.values;
+
+    const fecha = datos[1];
+    const funcionario = datos[4];
+    const linea = datos[5];
+
+    // 🔢 consecutivo
+    let consecutivoNum = control.getRange(""B1"").getValue();
+    if (!consecutivoNum || isNaN(consecutivoNum)) consecutivoNum = 260;
+
+    consecutivoNum++;
+    control.getRange(""B1"").setValue(consecutivoNum);
+
+    const consecutivo = 'VA-' + String(consecutivoNum).padStart(3, '0');
+
+    const filaDB = db.getLastRow() + 1;
+
+    db.getRange(filaDB, 1, 1, 12).setValues([[
+      consecutivo,   // ID
+      fecha,
+      '',            // dirigido
+      '',            // asunto
+      funcionario,
+      '',            // proceso
+      linea,
+      '',            // sublinea
+      '',            // soporte
+      '',            // anexos
+      '',
+      ''
+    ]]);
+
+    // 📧 correo (FUNCIONA SI EL FORM CAPTURA EMAIL)
+    let correo = """";
+    try {
+      correo = e.namedValues[""Dirección de correo electrónico""]?.[0] || """";
+    } catch (err) {}
+
+    let destinatarios = [...CONFIG.EMAILS];
+    if (correo && !destinatarios.includes(correo)) {
+      destinatarios.push(correo);
+    }
+
+    GmailApp.sendEmail(
+      destinatarios.join(','),
+      `Solicitud registrada ${consecutivo}`,
+      `Su solicitud fue creada correctamente.\n\nID: ${consecutivo}\n\nComplete aquí:\n${CONFIG.FORM2_URL}`
+    );
+
+    log(""OK"", ""Form1 → creado "" + consecutivo);
+
+  } catch (error) {
+    log(""ERROR"", ""Form1: "" + error.message);
+  }
+}
+
+// ================= FORMULARIO 2 =================
+function guardarForm2(e) {
+  try {
+    const ss = SpreadsheetApp.getActiveSpreadsheet();
+    const db = ss.getSheetByName(CONFIG.HOJA_DB);
+
+    const datos = e.values;
+
+    const id = datos[1];
+    const dirigido = datos[2];
+    const asunto = datos[3];
+    const proceso = datos[4];
+    const sublinea = datos[5];
+    const soporte = datos[6];
+    const anexos = datos[7];
+
+    const registros = db.getDataRange().getValues();
+
+    for (let i = 1; i < registros.length; i++) {
+
+      if (registros[i][0] == id) {
+
+        const fila = i + 1;
+
+        db.getRange(fila, 3).setValue(dirigido);
+        db.getRange(fila, 4).setValue(asunto);
+        db.getRange(fila, 6).setValue(proceso);
+        db.getRange(fila, 8).setValue(sublinea);
+        db.getRange(fila, 9).setValue(soporte);
+        db.getRange(fila, 10).setValue(anexos);
+
+        log(""OK"", ""Form2 → actualizado "" + id);
+        return;
+      }
+    }
+
+    // 🔥 SI NO EXISTE → LO CREA
+    const nuevaFila = db.getLastRow() + 1;
+
+    db.getRange(nuevaFila, 1, 1, 12).setValues([[
+      id,
+      '',
+      dirigido,
+      asunto,
+      '',
+      proceso,
+      '',
+      sublinea,
+      soporte,
+      anexos,
+      '',
+      ''
+    ]]);
+
+    log(""WARNING"", ""Form2 creó registro: "" + id);
+
+  } catch (error) {
+    log(""ERROR"", ""Form2: "" + error.message);
+  }
+}
+
+",Talento_Humano,82.41

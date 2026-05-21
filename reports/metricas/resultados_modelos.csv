@@ -1,0 +1,4 @@
+modelo,accuracy
+Logistic Regression,1.0
+Random Forest,1.0
+SVM,1.0
