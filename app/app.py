@@ -355,59 +355,68 @@ with st.sidebar.expander("📂 Buscador Inteligente"):
                             # PDF
                             # ======================================
 
+                            # ======================================
+                            # PDF
+                            # ======================================
+
                             if extension == "pdf":
 
-    st.info("📄 Vista previa PDF")
+                                st.info(
+                                    "📄 Vista previa PDF"
+                                )
 
-    try:
+                                try:
 
-        st.download_button(
-            label=f"📥 Descargar {nombre_archivo}",
-            data=open(ruta_archivo, "rb").read(),
-            file_name=nombre_archivo,
-            mime="application/pdf",
-            key=f"pdf_{i}"
-        )
+                                    with open(
+                                        ruta_archivo,
+                                        "rb"
+                                    ) as pdf_file:
 
-        with open(
-            ruta_archivo,
-            "rb"
-        ) as pdf_file:
+                                        pdf_bytes = pdf_file.read()
 
-            pdf_bytes = pdf_file.read()
+                                    st.download_button(
+                                        label=f"📥 Descargar {nombre_archivo}",
+                                        data=pdf_bytes,
+                                        file_name=nombre_archivo,
+                                        mime="application/pdf",
+                                        key=f"pdf_{i}"
+                                    )
 
-        st.write(
-            f"📄 Archivo: {nombre_archivo}"
-        )
+                                    st.write(
+                                        f"📄 Archivo: {nombre_archivo}"
+                                    )
 
-        st.write(
-            f"📦 Tamaño: {round(len(pdf_bytes)/1024,2)} KB"
-        )
+                                    st.write(
+                                        f"📦 Tamaño: {round(len(pdf_bytes)/1024,2)} KB"
+                                    )
 
-        texto_pdf = leer_pdf(
-            ruta_archivo
-        )
+                                    texto_pdf = leer_pdf(
+                                        ruta_archivo
+                                    )
 
-        if texto_pdf:
+                                    if (
+                                        texto_pdf
+                                        and not texto_pdf.startswith("ERROR")
+                                    ):
 
-            st.text_area(
-                "Contenido detectado",
-                texto_pdf[:5000],
-                height=350,
-                key=f"texto_pdf_{i}"
-            )
+                                        st.text_area(
+                                            "Contenido detectado",
+                                            texto_pdf[:5000],
+                                            height=350,
+                                            key=f"texto_pdf_{i}"
+                                        )
 
-        else:
+                                    else:
 
-            st.warning(
-                "No fue posible extraer texto del PDF"
-            )
+                                        st.warning(
+                                            "No fue posible extraer texto del PDF"
+                                        )
 
-    except Exception as e:
+                                except Exception as e:
 
-        st.error(
-            f"Error visualizando PDF: {e}"
-        )
+                                    st.error(
+                                        f"Error visualizando PDF: {e}"
+                                    )
 
                             # ======================================
                             # IMÁGENES
@@ -429,9 +438,7 @@ with st.sidebar.expander("📂 Buscador Inteligente"):
                                     "rb"
                                 ) as img_file:
 
-                                    img_bytes = (
-                                        img_file.read()
-                                    )
+                                    img_bytes = img_file.read()
 
                                 st.download_button(
                                     label=f"📥 Descargar {nombre_archivo}",
@@ -456,9 +463,7 @@ with st.sidebar.expander("📂 Buscador Inteligente"):
                                     "rb"
                                 ) as docx_file:
 
-                                    docx_bytes = (
-                                        docx_file.read()
-                                    )
+                                    docx_bytes = docx_file.read()
 
                                 st.download_button(
                                     label=f"📥 Descargar {nombre_archivo}",
