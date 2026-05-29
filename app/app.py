@@ -357,42 +357,57 @@ with st.sidebar.expander("📂 Buscador Inteligente"):
 
                             if extension == "pdf":
 
-                                with open(
-                                    ruta_archivo,
-                                    "rb"
-                                ) as pdf_file:
+    st.info("📄 Vista previa PDF")
 
-                                    pdf_bytes = (
-                                        pdf_file.read()
-                                    )
+    try:
 
-                                base64_pdf = (
-                                    base64.b64encode(
-                                        pdf_bytes
-                                    ).decode("utf-8")
-                                )
+        st.download_button(
+            label=f"📥 Descargar {nombre_archivo}",
+            data=open(ruta_archivo, "rb").read(),
+            file_name=nombre_archivo,
+            mime="application/pdf",
+            key=f"pdf_{i}"
+        )
 
-                                pdf_display = f'''
-                                <iframe
-                                src="data:application/pdf;base64,{base64_pdf}"
-                                width="100%"
-                                height="500"
-                                type="application/pdf">
-                                </iframe>
-                                '''
+        with open(
+            ruta_archivo,
+            "rb"
+        ) as pdf_file:
 
-                                st.markdown(
-                                    pdf_display,
-                                    unsafe_allow_html=True
-                                )
+            pdf_bytes = pdf_file.read()
 
-                                st.download_button(
-                                    label=f"📥 Descargar {nombre_archivo}",
-                                    data=pdf_bytes,
-                                    file_name=nombre_archivo,
-                                    mime="application/pdf",
-                                    key=f"pdf_{i}"
-                                )
+        st.write(
+            f"📄 Archivo: {nombre_archivo}"
+        )
+
+        st.write(
+            f"📦 Tamaño: {round(len(pdf_bytes)/1024,2)} KB"
+        )
+
+        texto_pdf = leer_pdf(
+            ruta_archivo
+        )
+
+        if texto_pdf:
+
+            st.text_area(
+                "Contenido detectado",
+                texto_pdf[:5000],
+                height=350,
+                key=f"texto_pdf_{i}"
+            )
+
+        else:
+
+            st.warning(
+                "No fue posible extraer texto del PDF"
+            )
+
+    except Exception as e:
+
+        st.error(
+            f"Error visualizando PDF: {e}"
+        )
 
                             # ======================================
                             # IMÁGENES
