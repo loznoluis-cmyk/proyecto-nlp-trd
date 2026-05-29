@@ -1,4 +1,3 @@
-
 # ==========================================
 # IMPORTACIONES
 # ==========================================
@@ -15,11 +14,11 @@ import os
 def mostrar_dashboard():
 
     st.title(
-        "📊 Dashboard Analítico NLP"
+        "📊 Dashboard Inteligente TRD"
     )
 
     st.write(
-        "Monitoreo inteligente de clasificaciones documentales"
+        "Monitoreo analítico de clasificación documental"
     )
 
     ruta_historial = (
@@ -35,7 +34,7 @@ def mostrar_dashboard():
     ):
 
         st.warning(
-            "No existe historial todavía"
+            "⚠️ No existe historial todavía"
         )
 
         return
@@ -55,13 +54,45 @@ def mostrar_dashboard():
     if len(df) == 0:
 
         st.warning(
-            "Historial vacío"
+            "⚠️ Historial vacío"
         )
 
         return
 
     # ==========================================
-    # KPIs
+    # NORMALIZAR COLUMNAS
+    # ==========================================
+
+    columnas = df.columns.tolist()
+
+    # Compatibilidad versiones anteriores
+    if "categoria" in columnas:
+
+        df["categoria_ia"] = df["categoria"]
+
+    if "estado_documental" not in columnas:
+
+        df["estado_documental"] = "SIN VALIDAR"
+
+    if "dependencia" not in columnas:
+
+        df["dependencia"] = "GENERAL"
+
+    if "tipo_documental" not in columnas:
+
+        df["tipo_documental"] = "OTRO"
+
+    # ==========================================
+    # FECHA
+    # ==========================================
+
+    df["fecha"] = pd.to_datetime(
+        df["fecha"],
+        errors="coerce"
+    )
+
+    # ==========================================
+    # KPIs PRINCIPALES
     # ==========================================
 
     total_documentos = len(df)
@@ -72,7 +103,13 @@ def mostrar_dashboard():
     )
 
     categoria_top = (
-        df["categoria"]
+        df["categoria_ia"]
+        .value_counts()
+        .idxmax()
+    )
+
+    dependencia_top = (
+        df["dependencia"]
         .value_counts()
         .idxmax()
     )
@@ -81,15 +118,19 @@ def mostrar_dashboard():
     # KPIs VISUALES
     # ==========================================
 
-    col1, col2, col3 = st.columns(3)
+    st.subheader(
+        "📌 Indicadores principales"
+    )
+
+    col1, col2, col3, col4 = st.columns(4)
 
     col1.metric(
-        "📄 Total Clasificaciones",
+        "📄 Documentos",
         total_documentos
     )
 
     col2.metric(
-        "🎯 Confianza Promedio",
+        "🎯 Confianza",
         f"{promedio_confianza}%"
     )
 
@@ -98,54 +139,62 @@ def mostrar_dashboard():
         categoria_top
     )
 
-    st.markdown("---")
-
-    # ==========================================
-    # EXPORTAR EXCEL
-    # ==========================================
-
-    st.subheader(
-        "📥 Exportar Reporte"
+    col4.metric(
+        "🏢 Dependencia Top",
+        dependencia_top
     )
-
-    archivo_excel = (
-        "reports/historial_clasificaciones.xlsx"
-    )
-
-    df.to_excel(
-        archivo_excel,
-        index=False
-    )
-
-    with open(
-        archivo_excel,
-        "rb"
-    ) as archivo:
-
-        st.download_button(
-
-            label="📥 Descargar historial Excel",
-
-            data=archivo,
-
-            file_name="historial_clasificaciones.xlsx",
-
-            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-
-        )
 
     st.markdown("---")
 
     # ==========================================
-    # DISTRIBUCIÓN
+    # ESTADOS DOCUMENTALES
     # ==========================================
 
     st.subheader(
-        "📊 Distribución documental"
+        "🚦 Estado documental"
+    )
+
+    estados = (
+        df["estado_documental"]
+        .value_counts()
+        .reset_index()
+    )
+
+    estados.columns = [
+        "Estado",
+        "Cantidad"
+    ]
+
+    grafica_estados = px.bar(
+
+        estados,
+
+        x="Estado",
+        y="Cantidad",
+
+        color="Estado",
+
+        title="Estado de validación documental"
+
+    )
+
+    st.plotly_chart(
+        grafica_estados,
+        use_container_width=True
+    )
+
+    st.markdown("---")
+
+    # ==========================================
+    # DISTRIBUCIÓN IA
+    # ==========================================
+
+    st.subheader(
+        "📊 Distribución IA"
     )
 
     conteo = (
-        df["categoria"]
+        df["categoria_ia"]
         .value_counts()
         .reset_index()
     )
@@ -164,7 +213,7 @@ def mostrar_dashboard():
 
         color="Categoria",
 
-        title="Cantidad de documentos por categoría"
+        title="Documentos por categoría IA"
 
     )
 
@@ -174,58 +223,87 @@ def mostrar_dashboard():
     )
 
     # ==========================================
-    # PIE CHART
+    # DEPENDENCIAS
     # ==========================================
 
     st.subheader(
-        "🥧 Participación por categoría"
+        "🏢 Dependencias institucionales"
     )
 
-    grafica_pie = px.pie(
+    dependencias = (
+        df["dependencia"]
+        .value_counts()
+        .reset_index()
+    )
 
-        conteo,
+    dependencias.columns = [
+        "Dependencia",
+        "Cantidad"
+    ]
 
-        names="Categoria",
+    grafica_dependencias = px.pie(
+
+        dependencias,
+
+        names="Dependencia",
         values="Cantidad",
 
-        title="Distribución porcentual"
+        title="Distribución por dependencia"
 
     )
 
     st.plotly_chart(
-        grafica_pie,
+        grafica_dependencias,
         use_container_width=True
     )
 
+    st.markdown("---")
+
     # ==========================================
-    # HISTORIAL
+    # TIPOS DOCUMENTALES
     # ==========================================
 
     st.subheader(
-        "🕒 Últimas clasificaciones"
+        "📂 Tipos documentales"
     )
 
-    st.dataframe(
+    tipos = (
+        df["tipo_documental"]
+        .value_counts()
+        .reset_index()
+    )
 
-        df.sort_values(
-            by="fecha",
-            ascending=False
-        ).head(10),
+    tipos.columns = [
+        "Tipo",
+        "Cantidad"
+    ]
 
+    grafica_tipos = px.bar(
+
+        tipos,
+
+        x="Tipo",
+        y="Cantidad",
+
+        color="Tipo",
+
+        title="Tipos documentales detectados"
+
+    )
+
+    st.plotly_chart(
+        grafica_tipos,
         use_container_width=True
-
     )
+
+    st.markdown("---")
 
     # ==========================================
     # CONFIANZA HISTÓRICA
     # ==========================================
 
     st.subheader(
-        "📈 Evolución de confianza"
-    )
-
-    df["fecha"] = pd.to_datetime(
-        df["fecha"]
+        "📈 Evolución de confianza IA"
     )
 
     grafica_linea = px.line(
@@ -243,4 +321,99 @@ def mostrar_dashboard():
         grafica_linea,
         use_container_width=True
     )
-    
+
+    st.markdown("---")
+
+    # ==========================================
+    # ALERTAS DOCUMENTALES
+    # ==========================================
+
+    st.subheader(
+        "🚨 Alertas documentales"
+    )
+
+    df_alertas = df[
+        df["estado_documental"]
+        == "VALIDACIÓN MANUAL"
+    ]
+
+    total_alertas = len(
+        df_alertas
+    )
+
+    if total_alertas > 0:
+
+        st.error(
+            f"⚠️ Existen {total_alertas} documentos que requieren validación manual"
+        )
+
+        st.dataframe(
+            df_alertas.sort_values(
+                by="fecha",
+                ascending=False
+            ),
+            use_container_width=True
+        )
+
+    else:
+
+        st.success(
+            "✅ No existen alertas documentales"
+        )
+
+    st.markdown("---")
+
+    # ==========================================
+    # HISTORIAL RECIENTE
+    # ==========================================
+
+    st.subheader(
+        "🕒 Últimas clasificaciones"
+    )
+
+    st.dataframe(
+
+        df.sort_values(
+            by="fecha",
+            ascending=False
+        ).head(15),
+
+        use_container_width=True
+
+    )
+
+    st.markdown("---")
+
+    # ==========================================
+    # EXPORTAR EXCEL
+    # ==========================================
+
+    st.subheader(
+        "📥 Exportar reporte institucional"
+    )
+
+    archivo_excel = (
+        "reports/historial_clasificaciones.xlsx"
+    )
+
+    df.to_excel(
+        archivo_excel,
+        index=False
+    )
+
+    with open(
+        archivo_excel,
+        "rb"
+    ) as archivo:
+
+        st.download_button(
+
+            label="📥 Descargar reporte Excel",
+
+            data=archivo,
+
+            file_name="historial_clasificaciones.xlsx",
+
+            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+
+        )

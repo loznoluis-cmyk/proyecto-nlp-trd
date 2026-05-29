@@ -1,6 +1,14 @@
-
 import sys
 import os
+import base64
+import zipfile
+import shutil
+import pickle
+import pandas as pd
+import tempfile
+import streamlit as st
+
+from datetime import datetime
 
 # ==========================================
 # CONFIGURAR RUTA DEL PROYECTO
@@ -16,18 +24,16 @@ sys.path.append(
 )
 
 # ==========================================
-# IMPORTACIONES
+# IMPORTACIONES PERSONALIZADAS
 # ==========================================
-
-import streamlit as st
-import pickle
-import pandas as pd
-
-from datetime import datetime
 
 from src.preprocess import (
     limpiar_texto,
-    procesar_texto
+    procesar_texto,
+    detectar_tipo_documental,
+    detectar_dependencia,
+    extraer_consecutivo,
+    detectar_estructura_documental
 )
 
 from src.dashboard import (
@@ -36,7 +42,8 @@ from src.dashboard import (
 
 from src.lector_documentos import (
     leer_pdf,
-    leer_docx
+    leer_docx,
+    leer_imagen
 )
 
 from src.explicabilidad import (
@@ -47,22 +54,39 @@ from src.visualizacion_nlp import (
     mostrar_wordcloud
 )
 
+from src.clasificador_trd import (
+    cargar_trd,
+    mover_documento
+)
+
+from src.buscador_semantico import (
+    buscar_documentos_semanticos
+)
+
+from src.visor_documental import (
+    enriquecer_resultados
+)
+
+from src.buscador_carpetas import (
+    buscar_en_carpetas
+)
+
+from src.motor_hibrido import (
+    clasificacion_hibrida
+)
+
 # ==========================================
 # CONFIG STREAMLIT
 # ==========================================
 
 st.set_page_config(
-
     page_title="Sistema NLP TRD",
-
     page_icon="📄",
-
     layout="wide"
-
 )
 
 # ==========================================
-# ESTILOS PERSONALIZADOS
+# ESTILOS
 # ==========================================
 
 st.markdown(
@@ -79,14 +103,11 @@ st.markdown(
     }
 
     section[data-testid="stSidebar"] {
-
         background-color: #E5E7EB;
-
         border-right: 1px solid #D1D5DB;
     }
 
     .stButton > button {
-
         background: linear-gradient(
             90deg,
             #2563EB,
@@ -94,40 +115,24 @@ st.markdown(
         );
 
         color: white;
-
         border-radius: 10px;
-
         border: none;
-
         padding: 0.7rem 1.3rem;
-
         font-weight: bold;
-
         font-size: 15px;
     }
 
-    .stButton > button:hover {
-
-        background: linear-gradient(
-            90deg,
-            #1D4ED8,
-            #1E3A8A
-        );
-
-        color: white;
+    .bloque {
+        background-color: white;
+        padding: 1.5rem;
+        border-radius: 18px;
+        box-shadow: 0px 3px 12px rgba(0,0,0,0.08);
+        margin-bottom: 1rem;
     }
 
-    .bloque {
-
-        background-color: white;
-
-        padding: 1.5rem;
-
-        border-radius: 18px;
-
-        box-shadow: 0px 3px 12px rgba(0,0,0,0.08);
-
-        margin-bottom: 1rem;
+    iframe {
+        border-radius: 10px;
+        border: 1px solid #D1D5DB;
     }
 
     </style>
@@ -136,7 +141,7 @@ st.markdown(
 )
 
 # ==========================================
-# HEADER CORPORATIVO
+# HEADER
 # ==========================================
 
 col1, col2 = st.columns([1, 5])
@@ -168,28 +173,301 @@ st.markdown("---")
 # SIDEBAR
 # ==========================================
 
-st.sidebar.title(
-    "⚙️ Navegación"
-)
+st.sidebar.title("⚙️ Navegación")
 
 st.sidebar.markdown("---")
 
 opcion = st.sidebar.radio(
-
     "Seleccione una opción",
-
     [
         "Clasificador",
         "Dashboard"
     ]
-
 )
 
 st.sidebar.markdown("---")
 
 st.sidebar.success(
-    "Sistema NLP TRD v1.0"
+    "Sistema NLP TRD v16.0"
 )
+
+# ==========================================
+# TABLA TRD
+# ==========================================
+
+with st.sidebar.expander("📂 Tabla TRD"):
+
+    try:
+
+        df_trd = cargar_trd()
+
+        st.success(
+            "TRD cargada correctamente"
+        )
+
+        st.dataframe(
+            df_trd.head(20),
+            use_container_width=True
+        )
+
+    except Exception as e:
+
+        st.error(
+            f"Error cargando TRD: {e}"
+        )
+
+# ==========================================
+# BÚSQUEDA SEMÁNTICA
+# ==========================================
+
+with st.sidebar.expander("🔎 Búsqueda Semántica"):
+
+    consulta_busqueda = st.text_input(
+        "Buscar documentos similares"
+    )
+
+    if st.button(
+        "🔍 Buscar",
+        key="buscar_semantico"
+    ):
+
+        if consulta_busqueda.strip() != "":
+
+            resultados = buscar_documentos_semanticos(
+                consulta_busqueda
+            )
+
+            if len(resultados) > 0:
+
+                resultados = enriquecer_resultados(
+                    resultados
+                )
+
+                st.success(
+                    "✅ Resultados encontrados"
+                )
+
+                for i, fila in resultados.iterrows():
+
+                    st.markdown("---")
+
+                    st.subheader(
+                        f"📄 Resultado {i + 1}"
+                    )
+
+                    if "tipo_documental" in fila:
+
+                        st.write(
+                            f"📂 Tipo: {fila['tipo_documental']}"
+                        )
+
+                    if "dependencia" in fila:
+
+                        st.write(
+                            f"🏢 Dependencia: {fila['dependencia']}"
+                        )
+
+                    if "resumen" in fila:
+
+                        st.write(
+                            fila["resumen"]
+                        )
+
+            else:
+
+                st.warning(
+                    "⚠️ Sin resultados"
+                )
+
+# ==========================================
+# BUSCADOR INTELIGENTE
+# ==========================================
+
+with st.sidebar.expander("📂 Buscador Inteligente"):
+
+    consulta_carpeta = st.text_input(
+        "Buscar carpeta, archivo o consecutivo"
+    )
+
+    if st.button(
+        "📁 Explorar Carpeta",
+        key="explorar_carpeta"
+    ):
+
+        if consulta_carpeta.strip() != "":
+
+            resultados_carpetas = buscar_en_carpetas(
+                consulta_carpeta
+            )
+
+            if len(resultados_carpetas) > 0:
+
+                st.success(
+                    f"✅ {len(resultados_carpetas)} archivos encontrados"
+                )
+
+                carpetas = (
+                    resultados_carpetas[
+                        "carpeta"
+                    ]
+                    .unique()
+                )
+
+                for carpeta in carpetas:
+
+                    st.markdown("---")
+
+                    st.subheader(
+                        f"🗂 Carpeta: {carpeta}"
+                    )
+
+                    archivos = resultados_carpetas[
+                        resultados_carpetas[
+                            "carpeta"
+                        ] == carpeta
+                    ]
+
+                    for i, fila in archivos.iterrows():
+
+                        ruta_archivo = fila["ruta"]
+
+                        nombre_archivo = fila["archivo"]
+
+                        st.write(
+                            f"📄 {nombre_archivo}"
+                        )
+
+                        st.caption(
+                            ruta_archivo
+                        )
+
+                        if os.path.exists(
+                            ruta_archivo
+                        ):
+
+                            extension = (
+                                nombre_archivo
+                                .split(".")[-1]
+                                .lower()
+                            )
+
+                            # ======================================
+                            # PDF
+                            # ======================================
+
+                            if extension == "pdf":
+
+                                with open(
+                                    ruta_archivo,
+                                    "rb"
+                                ) as pdf_file:
+
+                                    pdf_bytes = (
+                                        pdf_file.read()
+                                    )
+
+                                base64_pdf = (
+                                    base64.b64encode(
+                                        pdf_bytes
+                                    ).decode("utf-8")
+                                )
+
+                                pdf_display = f'''
+                                <iframe
+                                src="data:application/pdf;base64,{base64_pdf}"
+                                width="100%"
+                                height="500"
+                                type="application/pdf">
+                                </iframe>
+                                '''
+
+                                st.markdown(
+                                    pdf_display,
+                                    unsafe_allow_html=True
+                                )
+
+                                st.download_button(
+                                    label=f"📥 Descargar {nombre_archivo}",
+                                    data=pdf_bytes,
+                                    file_name=nombre_archivo,
+                                    mime="application/pdf",
+                                    key=f"pdf_{i}"
+                                )
+
+                            # ======================================
+                            # IMÁGENES
+                            # ======================================
+
+                            elif extension in [
+                                "png",
+                                "jpg",
+                                "jpeg"
+                            ]:
+
+                                st.image(
+                                    ruta_archivo,
+                                    use_container_width=True
+                                )
+
+                                with open(
+                                    ruta_archivo,
+                                    "rb"
+                                ) as img_file:
+
+                                    img_bytes = (
+                                        img_file.read()
+                                    )
+
+                                st.download_button(
+                                    label=f"📥 Descargar {nombre_archivo}",
+                                    data=img_bytes,
+                                    file_name=nombre_archivo,
+                                    mime="image/jpeg",
+                                    key=f"img_{i}"
+                                )
+
+                            # ======================================
+                            # WORD
+                            # ======================================
+
+                            elif extension == "docx":
+
+                                st.info(
+                                    "📄 Documento Word detectado"
+                                )
+
+                                with open(
+                                    ruta_archivo,
+                                    "rb"
+                                ) as docx_file:
+
+                                    docx_bytes = (
+                                        docx_file.read()
+                                    )
+
+                                st.download_button(
+                                    label=f"📥 Descargar {nombre_archivo}",
+                                    data=docx_bytes,
+                                    file_name=nombre_archivo,
+                                    mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                                    key=f"docx_{i}"
+                                )
+
+                            # ======================================
+                            # OTROS
+                            # ======================================
+
+                            else:
+
+                                st.info(
+                                    "Vista previa no disponible"
+                                )
+
+            else:
+
+                st.warning(
+                    "⚠️ No se encontraron resultados"
+                )
 
 # ==========================================
 # DASHBOARD
@@ -204,10 +482,6 @@ if opcion == "Dashboard":
 # ==========================================
 
 else:
-
-    # ==========================================
-    # CARGAR MODELOS
-    # ==========================================
 
     with open(
         "models/modelo_nlp.pkl",
@@ -237,7 +511,7 @@ else:
         )
 
     # ==========================================
-    # TECNOLOGÍAS IMPLEMENTADAS
+    # TECNOLOGÍAS
     # ==========================================
 
     st.markdown(
@@ -249,37 +523,49 @@ else:
         unsafe_allow_html=True
     )
 
-    st.write("✅ NLP (Procesamiento de Lenguaje Natural)")
-    st.write("✅ TF-IDF")
-    st.write("✅ Machine Learning")
-    st.write("✅ Clasificación automática documental")
-    st.write("✅ Lectura automática de PDFs y Word")
-    st.write("✅ Dashboard analítico")
-    st.write("✅ IA explicable")
-    st.write("✅ WordCloud NLP")
+    tecnologias = [
+
+        "NLP avanzado",
+        "OCR automático",
+        "PDFs escaneados",
+        "Machine Learning",
+        "Clasificación híbrida TRD",
+        "Motor estructural",
+        "Procesamiento masivo ZIP",
+        "Buscador semántico",
+        "Visualizador documental",
+        "WordCloud NLP"
+
+    ]
+
+    for tech in tecnologias:
+
+        st.write(f"✅ {tech}")
 
     st.markdown("---")
 
     # ==========================================
-    # SUBIR DOCUMENTO
+    # CLASIFICACIÓN INDIVIDUAL
     # ==========================================
 
+    st.subheader(
+        "📄 Clasificación Individual"
+    )
+
     archivo = st.file_uploader(
-
-        "📂 Suba un archivo PDF o Word",
-
+        "Suba PDF, Word o Imagen",
         type=[
             "pdf",
-            "docx"
-        ]
-
+            "docx",
+            "png",
+            "jpg",
+            "jpeg"
+        ],
+        key="archivo_individual"
     )
 
     texto_archivo = ""
-
-    # ==========================================
-    # LEER DOCUMENTOS
-    # ==========================================
+    ruta_temporal = ""
 
     if archivo is not None:
 
@@ -289,85 +575,98 @@ else:
             .lower()
         )
 
+        temp_dir = tempfile.gettempdir()
+
+        ruta_temporal = os.path.join(
+            temp_dir,
+            archivo.name
+        )
+
+        with open(
+            ruta_temporal,
+            "wb"
+        ) as f:
+
+            f.write(
+                archivo.getbuffer()
+            )
+
         if extension == "pdf":
 
             texto_archivo = leer_pdf(
-                archivo
+                ruta_temporal
             )
 
         elif extension == "docx":
 
             texto_archivo = leer_docx(
-                archivo
+                ruta_temporal
+            )
+
+        else:
+
+            texto_archivo = leer_imagen(
+                ruta_temporal
             )
 
         st.success(
             "✅ Documento leído correctamente"
         )
 
-    # ==========================================
-    # TEXTO MANUAL
-    # ==========================================
-
     texto_usuario = st.text_area(
-
-        "✍️ O escriba el texto manualmente:",
-
+        "✍️ Texto del documento",
         value=texto_archivo,
-
-        height=220,
-
-        placeholder="Ejemplo: solicitud de matrícula académica"
-
+        height=250
     )
 
-    # ==========================================
-    # BOTÓN CLASIFICAR
-    # ==========================================
-
     if st.button(
-        "🚀 Clasificar documento"
+        "🚀 Clasificar documento",
+        key="clasificar_individual"
     ):
 
-        # ==========================================
-        # VALIDAR TEXTO
-        # ==========================================
-
-        if texto_usuario.strip() == "":
-
-            st.warning(
-                "⚠️ Por favor ingrese un texto"
-            )
-
-        else:
-
-            # ==========================================
-            # LIMPIEZA
-            # ==========================================
+        if texto_usuario.strip() != "":
 
             texto_limpio = limpiar_texto(
                 texto_usuario
             )
 
-            # ==========================================
-            # NLP
-            # ==========================================
-
             texto_procesado = procesar_texto(
                 texto_limpio
             )
 
-            # ==========================================
-            # TF-IDF
-            # ==========================================
+            tipo_nlp = detectar_tipo_documental(
+                texto_procesado
+            )
+
+            dependencia = detectar_dependencia(
+                texto_procesado
+            )
+
+            resultado_hibrido = clasificacion_hibrida(
+                texto_usuario,
+                tipo_nlp,
+                dependencia
+            )
+
+            tipo_documental = resultado_hibrido[
+                "tipo_final"
+            ]
+
+            score_hibrido = resultado_hibrido[
+                "score"
+            ]
+
+            fuente_clasificacion = resultado_hibrido[
+                "fuente"
+            ]
+
+            consecutivo = extraer_consecutivo(
+                texto_usuario
+            )
 
             vector = vectorizador.transform(
                 [texto_procesado]
             )
-
-            # ==========================================
-            # PREDICCIÓN
-            # ==========================================
 
             prediccion = modelo.predict(
                 vector
@@ -375,163 +674,422 @@ else:
 
             categoria = encoder.inverse_transform(
                 prediccion
-            )
-
-            # ==========================================
-            # PROBABILIDADES
-            # ==========================================
+            )[0]
 
             probabilidades = modelo.predict_proba(
                 vector
             )
 
-            confianza = max(
-                probabilidades[0]
-            ) * 100
-
-            # ==========================================
-            # RESULTADOS
-            # ==========================================
+            confianza = round(
+                max(probabilidades[0]) * 100,
+                2
+            )
 
             st.success(
-                f"📁 Categoría predicha: {categoria[0]}"
+                f"📂 Tipo documental: {tipo_documental}"
             )
 
             st.info(
-                f"🎯 Confianza del modelo: {confianza:.2f}%"
+                f"🧠 Fuente clasificación: {fuente_clasificacion}"
             )
 
-            # ==========================================
-            # ALERTA
-            # ==========================================
+            st.info(
+                f"🎯 Score híbrido: {score_hibrido}"
+            )
 
-            if confianza < 60:
+            st.success(
+                f"🏢 Dependencia: {dependencia}"
+            )
+
+            st.success(
+                f"🔖 Consecutivo: {consecutivo}"
+            )
+
+            st.success(
+                f"🤖 Categoría IA: {categoria}"
+            )
+
+            st.info(
+                f"🎯 Confianza IA: {confianza}%"
+            )
+
+            # ======================================
+            # VALIDACIÓN
+            # ======================================
+
+            if confianza < 65:
 
                 st.warning(
-                    "⚠️ Baja confianza en la clasificación"
+                    "⚠️ Documento enviado a revisión manual"
                 )
 
-            # ==========================================
-            # TABLA PROBABILIDADES
-            # ==========================================
+            else:
+
+                if archivo is not None:
+
+                    try:
+
+                        ruta_final = mover_documento(
+                            ruta_temporal,
+                            tipo_documental,
+                            dependencia
+                        )
+
+                        st.success(
+                            f"✅ Documento organizado en: {ruta_final}"
+                        )
+
+                    except Exception as e:
+
+                        st.error(
+                            f"Error organizando: {e}"
+                        )
 
             st.subheader(
-                "📊 Probabilidades por categoría"
-            )
-
-            clases = encoder.classes_
-
-            df_probabilidades = pd.DataFrame({
-
-                "Categoría": clases,
-
-                "Probabilidad": probabilidades[0]
-
-            })
-
-            df_probabilidades["Probabilidad"] = (
-                df_probabilidades["Probabilidad"] * 100
-            )
-
-            df_probabilidades = (
-                df_probabilidades.sort_values(
-                    by="Probabilidad",
-                    ascending=False
-                )
-            )
-
-            st.dataframe(
-                df_probabilidades,
-                use_container_width=True
-            )
-
-            # ==========================================
-            # IA EXPLICABLE
-            # ==========================================
-
-            st.subheader(
-                "🧠 Explicación de la IA"
-            )
-
-            palabras_clave = obtener_palabras_clave(
-                vectorizador,
-                vector
-            )
-
-            st.write(
-                "El modelo detectó las siguientes palabras importantes:"
-            )
-
-            for palabra in palabras_clave:
-
-                st.write(
-                    f"• {palabra}"
-                )
-
-            # ==========================================
-            # WORDCLOUD
-            # ==========================================
-
-            st.subheader(
-                "☁️ Nube de palabras NLP"
+                "☁️ WordCloud NLP"
             )
 
             mostrar_wordcloud(
                 texto_procesado
             )
 
-            # ==========================================
-            # HISTORIAL
-            # ==========================================
-
-            historial = pd.DataFrame([{
-
-                "fecha": datetime.now(),
-
-                "texto": texto_usuario,
-
-                "categoria": categoria[0],
-
-                "confianza": round(
-                    confianza,
-                    2
-                )
-
-            }])
-
-            ruta_historial = (
-                "reports/historial.csv"
+            st.subheader(
+                "🧠 Explicación IA"
             )
 
-            if os.path.exists(
-                ruta_historial
-            ):
+            palabras = obtener_palabras_clave(
+                vectorizador,
+                vector
+            )
 
-                historial.to_csv(
+            for palabra in palabras:
 
-                    ruta_historial,
+                st.write(f"• {palabra}")
 
-                    mode="a",
+    # ==========================================
+    # PROCESAMIENTO MASIVO ZIP
+    # ==========================================
 
-                    header=False,
+    st.markdown("---")
 
-                    index=False
+    st.subheader(
+        "📦 Procesamiento Masivo ZIP"
+    )
 
+    archivo_zip = st.file_uploader(
+        "Suba carpeta ZIP",
+        type=["zip"],
+        key="zip_uploader"
+    )
+
+    if archivo_zip is not None:
+
+        st.success(
+            "✅ ZIP cargado correctamente"
+        )
+
+        if st.button(
+            "🚀 Clasificar documentos ZIP",
+            key="clasificar_zip"
+        ):
+
+            st.info(
+                "Procesando ZIP..."
+            )
+
+            temp_dir = tempfile.mkdtemp()
+
+            zip_path = os.path.join(
+                temp_dir,
+                archivo_zip.name
+            )
+
+            with open(
+                zip_path,
+                "wb"
+            ) as f:
+
+                f.write(
+                    archivo_zip.getbuffer()
                 )
 
-            else:
+            carpeta_extraida = os.path.join(
+                temp_dir,
+                "extraido"
+            )
 
-                historial.to_csv(
+            with zipfile.ZipFile(
+                zip_path,
+                "r"
+            ) as zip_ref:
 
-                    ruta_historial,
+                zip_ref.extractall(
+                    carpeta_extraida
+                )
 
-                    index=False
+            archivos_detectados = []
 
+            for root, dirs, files in os.walk(
+                carpeta_extraida
+            ):
+
+                for file in files:
+
+                    extension = (
+                        file
+                        .split(".")[-1]
+                        .lower()
+                    )
+
+                    if extension in [
+                        "pdf",
+                        "docx",
+                        "png",
+                        "jpg",
+                        "jpeg"
+                    ]:
+
+                        archivos_detectados.append(
+                            os.path.join(
+                                root,
+                                file
+                            )
+                        )
+
+            st.success(
+                f"✅ {len(archivos_detectados)} documentos encontrados"
+            )
+
+            barra = st.progress(0)
+
+            resultados = []
+
+            for i, ruta_archivo in enumerate(
+                archivos_detectados
+            ):
+
+                try:
+
+                    extension = (
+                        ruta_archivo
+                        .split(".")[-1]
+                        .lower()
+                    )
+
+                    if extension == "pdf":
+
+                        texto = leer_pdf(
+                            ruta_archivo
+                        )
+
+                    elif extension == "docx":
+
+                        texto = leer_docx(
+                            ruta_archivo
+                        )
+
+                    else:
+
+                        texto = leer_imagen(
+                            ruta_archivo
+                        )
+
+                    texto_limpio = limpiar_texto(
+                        texto
+                    )
+
+                    texto_procesado = procesar_texto(
+                        texto_limpio
+                    )
+
+                    tipo_nlp = detectar_tipo_documental(
+                        texto_procesado
+                    )
+
+                    dependencia = detectar_dependencia(
+                        texto_procesado
+                    )
+
+                    resultado_hibrido = clasificacion_hibrida(
+                        texto,
+                        tipo_nlp,
+                        dependencia
+                    )
+
+                    tipo_documental = resultado_hibrido[
+                        "tipo_final"
+                    ]
+
+                    score_hibrido = resultado_hibrido[
+                        "score"
+                    ]
+
+                    fuente = resultado_hibrido[
+                        "fuente"
+                    ]
+
+                    consecutivo = extraer_consecutivo(
+                        texto
+                    )
+
+                    vector = vectorizador.transform(
+                        [texto_procesado]
+                    )
+
+                    prediccion = modelo.predict(
+                        vector
+                    )
+
+                    categoria = encoder.inverse_transform(
+                        prediccion
+                    )[0]
+
+                    confianza = round(
+                        max(
+                            modelo.predict_proba(
+                                vector
+                            )[0]
+                        ) * 100,
+                        2
+                    )
+
+                    if confianza < 65:
+
+                        carpeta_revision = (
+                            "data/revision_manual"
+                        )
+
+                        os.makedirs(
+                            carpeta_revision,
+                            exist_ok=True
+                        )
+
+                        destino_revision = os.path.join(
+                            carpeta_revision,
+                            os.path.basename(
+                                ruta_archivo
+                            )
+                        )
+
+                        shutil.copy(
+                            ruta_archivo,
+                            destino_revision
+                        )
+
+                        ruta_final = destino_revision
+
+                        estado = "REVISIÓN MANUAL"
+
+                    else:
+
+                        ruta_final = mover_documento(
+                            ruta_archivo,
+                            tipo_documental,
+                            dependencia
+                        )
+
+                        estado = "CLASIFICADO"
+
+                    resultados.append({
+
+                        "archivo":
+                        os.path.basename(
+                            ruta_archivo
+                        ),
+
+                        "tipo_documental":
+                        tipo_documental,
+
+                        "dependencia":
+                        dependencia,
+
+                        "categoria_ia":
+                        categoria,
+
+                        "confianza":
+                        confianza,
+
+                        "score_hibrido":
+                        score_hibrido,
+
+                        "fuente":
+                        fuente,
+
+                        "estado":
+                        estado,
+
+                        "consecutivo":
+                        consecutivo,
+
+                        "ruta_final":
+                        ruta_final
+
+                    })
+
+                except Exception as e:
+
+                    resultados.append({
+
+                        "archivo":
+                        os.path.basename(
+                            ruta_archivo
+                        ),
+
+                        "error":
+                        str(e)
+
+                    })
+
+                progreso = int(
+                    ((i + 1) / len(archivos_detectados)) * 100
+                )
+
+                barra.progress(
+                    progreso
                 )
 
             st.success(
-                "✅ Historial guardado correctamente"
+                "✅ Procesamiento masivo finalizado"
             )
+
+            df_resultados = pd.DataFrame(
+                resultados
+            )
+
+            st.subheader(
+                "📊 Resultados procesamiento masivo"
+            )
+
+            st.dataframe(
+                df_resultados,
+                use_container_width=True
+            )
+
+            # ======================================
+            # EXPORTAR EXCEL
+            # ======================================
+
+            excel_path = os.path.join(
+                temp_dir,
+                "resultado_masivo.xlsx"
+            )
+
+            df_resultados.to_excel(
+                excel_path,
+                index=False
+            )
+
+            with open(
+                excel_path,
+                "rb"
+            ) as excel_file:
+
+                st.download_button(
+                    label="📥 Descargar reporte Excel",
+                    data=excel_file,
+                    file_name="resultado_masivo.xlsx",
+                    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                )
 
 # ==========================================
 # FOOTER
@@ -540,5 +1098,5 @@ else:
 st.markdown("---")
 
 st.caption(
-    "Proyecto desarrollado en Python + NLP + Machine Learning + Streamlit"
+    "Proyecto desarrollado con Python + NLP + OCR + Machine Learning + Streamlit"
 )

@@ -1,46 +1,131 @@
-# ==========================================
-# IMPORTACIONES
-# ==========================================
-
-import PyPDF2
+import fitz
 import docx
+import pytesseract
+
+from PIL import Image
+
 
 # ==========================================
 # LEER PDF
 # ==========================================
 
-def leer_pdf(archivo):
+def leer_pdf(ruta_pdf):
 
-    texto = ""
+    try:
 
-    lector = PyPDF2.PdfReader(
-        archivo
-    )
+        texto = ""
 
-    for pagina in lector.pages:
+        pdf = fitz.open(
+            ruta_pdf
+        )
 
-        contenido = pagina.extract_text()
+        for pagina in pdf:
 
-        if contenido:
+            texto += pagina.get_text()
 
-            texto += contenido
+        pdf.close()
 
-    return texto
+        # ======================================
+        # SI EL PDF NO TIENE TEXTO
+        # ======================================
+
+        if texto.strip() == "":
+
+            texto = ocr_pdf(
+                ruta_pdf
+            )
+
+        return texto
+
+    except Exception as e:
+
+        return f"ERROR PDF: {e}"
+
 
 # ==========================================
-# LEER DOCX
+# OCR PDF ESCANEADO
 # ==========================================
 
-def leer_docx(archivo):
+def ocr_pdf(ruta_pdf):
 
-    documento = docx.Document(
-        archivo
-    )
+    try:
 
-    texto = ""
+        texto = ""
 
-    for parrafo in documento.paragraphs:
+        pdf = fitz.open(
+            ruta_pdf
+        )
 
-        texto += parrafo.text + "\n"
+        for pagina in pdf:
 
-    return texto
+            pix = pagina.get_pixmap()
+
+            imagen = Image.frombytes(
+                "RGB",
+                [pix.width, pix.height],
+                pix.samples
+            )
+
+            texto += pytesseract.image_to_string(
+                imagen,
+                lang="spa"
+            )
+
+        pdf.close()
+
+        return texto
+
+    except Exception as e:
+
+        return f"ERROR OCR PDF: {e}"
+
+
+# ==========================================
+# LEER WORD
+# ==========================================
+
+def leer_docx(ruta_docx):
+
+    try:
+
+        documento = docx.Document(
+            ruta_docx
+        )
+
+        texto = ""
+
+        for parrafo in documento.paragraphs:
+
+            texto += (
+                parrafo.text + "\n"
+            )
+
+        return texto
+
+    except Exception as e:
+
+        return f"ERROR DOCX: {e}"
+
+
+# ==========================================
+# LEER IMAGEN
+# ==========================================
+
+def leer_imagen(ruta_imagen):
+
+    try:
+
+        imagen = Image.open(
+            ruta_imagen
+        )
+
+        texto = pytesseract.image_to_string(
+            imagen,
+            lang="spa"
+        )
+
+        return texto
+
+    except Exception as e:
+
+        return f"ERROR OCR IMAGEN: {e}"
