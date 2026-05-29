@@ -167,3 +167,4 @@ websockets==16.0
 widgetsnbextension==4.0.15
 wordcloud==1.9.6
 wrapt==2.1.2
+PyMuPDF==1.26.4
